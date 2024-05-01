@@ -1,0 +1,45 @@
+@font-face {
+    font-family: Bespoke-Italic;
+    src: url("./fonts/bespoke-italic.otf") format("opentype");
+}
+
+@font-face {
+    font-family: Bespoke-Straight;
+    src: url("./fonts/bespoke-straight.otf") format("opentype");
+}
+
+body {
+	font-family: Bespoke-Straight;
+	line-height: 1.2;
+}
+
+h1, h2 {
+	font-family: Bespoke-Italic;
+}
+
+h1 {
+	margin-top: 40px;
+}
+
+.container {
+	max-width: 600px;
+	margin: 15px;
+}
+
+.spacer {
+	display: inline-block;
+	width: 20px;
+}
+
+.header-link {
+/*	float: right;*/
+	text-align: right;
+}
+
+.text-content {
+	max-width: 500px;
+}
+
+.text-content p, ul {
+	font-size: 0.9em;
+}
