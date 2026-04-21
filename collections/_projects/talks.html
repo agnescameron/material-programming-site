@@ -1,0 +1,19 @@
+---
+layout: main
+title: material programming talks series
+url: talks
+status: published
+description: Monthly practice talks with knit and software researchers and practicioners, for Spring and Summer 2026.
+image:
+---
+
+<p>
+	For the Spring and Summer term 2026, we are organising a series of talks with knit and software researchers and practicioners.
+</p>
+
+{% assign talks = site.talks | sort: date | reverse %}
+{% for talk in talks limit:5 %}
+		<p><a href="{{ talk.url }}"><b>{{ talk.date | date: "%d/%m/%Y" }}</b>: {{ talk.title }}</a>
+		<br>{{ talk.organisation }}
+		</p>
+{% endfor %}

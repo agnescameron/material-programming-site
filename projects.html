@@ -1,44 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>material programming research project</title>
-	<link rel="stylesheet" type="text/css" href="main.css">
-</head>
-<body>
+---
+layout: main
+title: projects
+image: /img/cast-on-1-by-1-rib.jpg
+---
 
-<div class="container">
-	<p>
-		/\\/o\/\\/o\/\\/o\/\\/\o\/<span class="spacer"></span><a class="header-link" href="index.html">home</a><br>
-		//\o/\//\o/\//\o/\//\/o/\/<span class="spacer"></span><a class="header-link" href="ktrg.html">knit tech reading group</a><br>
-		\/\\o/\/\\o\\/\\o\\/\\/o\\<span class="spacer"></span><a class="header-link" href="people.html">people</a><br>
-		\//o\/\//o//\//o//\//\o//\<span class="spacer"></span><a class="header-link" href="projects.html">projects</a><br>
-	</p>
+<!-- <p>
+We are working on a number of parallel projects to develop research and practice.
+</p> -->
 
-	<h1>projects</h1>
-
-	<div class="text-content">
-		<h2>material programming talk series</h2>
-
-		<p>
-		In Spring 2026 we are running a series of talks. Speakers include:
-		<ul>
-			<li>Ilana Blumberg</li>
-			<li>Gerard Rubio</li>
-			<li>Peter Van Hardenberg</li>
-		</ul>
-		</p>
-
-		<h2>open knitting tools directory</h2>
-
-		<p>
-		We are collecting a <a href="https://docs.google.com/spreadsheets/d/1Mk6qIkn9i-3fB2CGQtpkl0AzOCBJlxThXYyPawyuev8/edit?gid=0#gid=0">collaborative index</a> of knit design software. The google sheet is openly-editable, contributions are welcome!
-		</p>
-	</div>
-
-
-</div>
-
-</body>
-</html>
+{% assign projects = site.projects | sort: date | reverse %}
+{% for project in projects limit:5 %}
+	{% if project.status == 'published' %}
+		<a href="{{ project.url }}">{{ project.title }} → </a><br>
+		<div>
+			<p>{{ project.description }} </p>
+	{% endif %}
+{% endfor %}
