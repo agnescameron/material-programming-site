@@ -14,5 +14,11 @@ future: true
 collections:
   projects:
     output: true
+    order:
+      - software.md
+      - talks.md
+      - workshops.md
+      - tools-index.md
+      - ktrg.md
   talks:
     output: true

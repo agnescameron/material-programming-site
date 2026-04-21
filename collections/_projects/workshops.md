@@ -4,7 +4,7 @@ title: material programming workshops
 url: workshops
 status: published
 description: Series of student-facing workshops on developing software for the Kniterate machine
-image: /img/mat_prog.png
+image: /img/crowd.jpeg
 ---
 
 For Spring and Summer 2026, we recieved a UAL Teaching and Learning grant to run a series of interactive student-facing workshops. These support students to develop their own tools for generating knitted textiles based on the knitout interchange format to interface to the Smart Textiles Lab Kniterate machine.
