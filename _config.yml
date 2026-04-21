@@ -6,7 +6,7 @@ sass:
 root: /
 collections_dir: collections
 
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "/~material" # the subpath of your site, e.g. /blog
 url: ""
 
 future: true
