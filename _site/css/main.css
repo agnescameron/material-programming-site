@@ -1,11 +1,11 @@
 @font-face {
     font-family: Bespoke-Italic;
-    src: url("/fonts/bespoke-italic.otf") format("opentype");
+    src: url("../fonts/bespoke-italic.otf") format("opentype");
 }
 
 @font-face {
     font-family: Bespoke-Straight;
-    src: url("/fonts/bespoke-straight.otf") format("opentype");
+    src: url("../fonts/bespoke-straight.otf") format("opentype");
 }
 
 body {

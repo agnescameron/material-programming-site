@@ -17,10 +17,10 @@
 
 <div class="container">
 	<p>
-		/\\/o\/\\/o\/\\/o\/\\/\o\/<span class="spacer"></span><a class="header-link" href="/index.html">home</a><br>
-		//\o/\//\o/\//\o/\//\/o/\/<span class="spacer"></span><a class="header-link" href="/projects/ktrg.html">knit tech reading group</a><br>
-		\/\\o/\/\\o\\/\\o\\/\\/o\\<span class="spacer"></span><a class="header-link" href="/people.html">people</a><br>
-		\//o\/\//o//\//o//\//\o//\<span class="spacer"></span><a class="header-link" href="/projects.html">projects</a><br>
+		/\\/o\/\\/o\/\\/o\/\\/\o\/<span class="spacer"></span><a class="header-link" href="{{ '/index.html' | prepend: site.baseurl }}">home</a><br>
+		//\o/\//\o/\//\o/\//\/o/\/<span class="spacer"></span><a class="header-link" href="{{ '/projects/ktrg.html' | prepend: site.baseurl }}">knit tech reading group</a><br>
+		\/\\o/\/\\o\\/\\o\\/\\/o\\<span class="spacer"></span><a class="header-link" href="{{ '/people.html' | prepend: site.baseurl }}">people</a><br>
+		\//o\/\//o//\//o//\//\o//\<span class="spacer"></span><a class="header-link" href="{{ '/projects.html' | prepend: site.baseurl }}">projects</a><br>
 	</p>
 
 	<h1>{{page.title}}</h1>
