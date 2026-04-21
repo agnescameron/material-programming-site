@@ -58,3 +58,11 @@ ul {
 .project-img {
 	max-width: 500px;
 }
+
+.thumb {
+	max-height: 150px;
+}
+
+.proj-item {
+	margin-top: 40px;
+}

@@ -11,9 +11,10 @@ We are working on a number of parallel projects to develop research and practice
 {% assign projects = site.projects | sort: date | reverse %}
 {% for project in projects limit:5 %}
 	{% if project.status == 'published' %}
+		<div class="proj-item">
 		<a href="{{ project.url | prepend: site.baseurl }}">{{ project.title }} → </a><br>
-		<div>
 			<p>{{ project.description }} </p>
+			<img class="thumb" src="{{ project.image | prepend: site.baseurl }}"/>
 		</div>
 	{% endif %}
 {% endfor %}

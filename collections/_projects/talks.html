@@ -4,7 +4,7 @@ title: material programming talks series
 url: talks
 status: published
 description: Monthly practice talks with knit and software researchers and practicioners, for Spring and Summer 2026.
-image:
+image: /img/talks.png
 ---
 
 <p>
@@ -13,8 +13,9 @@ image:
 
 {% assign talks = site.talks | sort: date | reverse %}
 {% for talk in talks limit:5 %}
+		<div class="proj-item">
 		<a href="{{ talk.url | prepend: site.baseurl }}">{{ talk.date | date: "%d/%m/%Y" }}: {{ talk.title }} → </a><br>
-		<div>
 			<p>{{ talk.organisation }} </p>
+			<img class="thumb" src="{{ talk.image | prepend: site.baseurl }}"/>
 		</div>
 {% endfor %}
