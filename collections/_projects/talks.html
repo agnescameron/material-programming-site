@@ -13,7 +13,8 @@ image:
 
 {% assign talks = site.talks | sort: date | reverse %}
 {% for talk in talks limit:5 %}
-		<p><a href="{{ talk.url }}"><b>{{ talk.date | date: "%d/%m/%Y" }}</b>: {{ talk.title }}</a>
-		<br>{{ talk.organisation }}
-		</p>
+		<a href="{{ talk.url | prepend: site.baseurl }}">{{ talk.title }} → </a><br>
+		<div>
+			<p>{{ talk.organisation }} </p>
+		</div>
 {% endfor %}
