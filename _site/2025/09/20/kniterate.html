@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>material programming research project</title>
+	<link rel="stylesheet" type="text/css" href="/~material/css/main.css">
+	<script>
+		window.goatcounter = {
+			path: function(p) { return location.host + p }
+		}
+	</script>
+	<script data-goatcounter="https://agnescam.goatcounter.com/count"
+	 async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+<div class="post-container">
+	<p>
+		/\\/o\/\\/o\/\\/o\/\\/\o\/<span class="spacer"></span><a class="header-link" href="/~material/index.html">home</a><br>
+		//\o/\//\o/\//\o/\//\/o/\/<span class="spacer"></span><a class="header-link" href="/~material/blog.html">blog</a><br>
+		\/\\o/\/\\o\\/\\o\\/\\/o\\<span class="spacer"></span><a class="header-link" href="/~material/people.html">people</a><br>
+		\//o\/\//o//\//o//\//\o//\<span class="spacer"></span><a class="header-link" href="/~material/projects.html">projects</a><br>
+	</p>
+
+	<h1>lab notes 1</h1>
+	<div class="text-content">
+		<p><a href="https://textiles-lab.github.io/knitout/knitout.html">Knitout</a> is an open interchange industrial knit file format designed by the <a href="https://textiles-lab.github.io/">Textiles Lab</a> at Carnegie Mellon University. This group’s research is extremely interesting, and they’re one of the major sources of new pieces of knit software/research.</p>
+
+<p>The appeal of Knitout is that it can theoretically describe the operations of any of the major knit machines (e.g. Shima Seiki, Stoll, Kniterate). This means that, instead of being reliant on proprietary software, it might be possible to write the same code to be agnostic to different machine backends, opening up the potential for <a href="https://www.inkandswitch.com/essay/malleable-software/">malleable knitting software</a>.</p>
+
+<p>This post documents a number of early experiments with the CMU repository to see how easily we could get the knitout files working on our Kniterate machine.</p>
+
+<figure>
+	<img src="/~material/img/knitout/final-waste.png" alt="main" />
+	<span class="mainnote">an example knit file rendered in the knitout visualiser</span>
+</figure>
+
+<p><span class="marginnote">
+	<img src="/~material/img/knitout/vector-tiles.png" />
+	<!-- <img src="/~material/img/knitout/face-notes.png"/> -->
+	big fan of the knitout visualiser stitch svg reference files
+</span></p>
+
+<h2 id="where-is-knitout">where is knitout?</h2>
+
+<p>Knitout and related tools appear to still be very much under active research/development, and documentation and tools are distributed across a few different repositories, which made piecing them together initially a bit confusing. We found <a href="https://knit.work/">this website</a> (though also a work in process) helpful for getting a sense of how everything fits together. For the workflow to produce these designs, we ended up using a combination of the following tools:</p>
+
+<ul>
+  <li><strong><a href="https://github.com/textiles-lab/knitout-examples/tree/master">knitout examples</a></strong>, a repository of example knitout files, and JS used to generate them – some of these seem to be a little out of date</li>
+  <li><strong>knitout/js <a href="https://github.com/textiles-lab/knitout-live-visualizer">visualisation tools</a></strong>, which provide a great sanity check for .k files, and also have a live-coding feature for writing js code that generates knit</li>
+  <li>the <strong><a href="https://github.com/textiles-lab/knitout-backend-kniterate">backend kniterate conversion tools</a></strong>, to convert generic knitout files to make things run on the kniterate</li>
+</ul>
+
+<p>To make things simpler and get more verbose error messages, we downloaded these repositories locally and ran tools from the command line, rather than using the online conversion and visualiser tools.</p>
+
+<p>We <em>didn’t</em> yet properly test out the npm package (<a href="https://github.com/textiles-lab/knitout-frontend-js">knitout-frontend-js</a>), or the sister <a href="https://github.com/textiles-lab/knitout-frontend-py">python package</a> as the example js file we used was acting more like a printer. It’s possible that some of the kniterate conversion tools will be better suited to files generated in this way – we’ll try this in attempt 2.</p>
+
+<p>We got the sense that Knitout has been developed <em>primarily</em> with the Shima in mind, and there are a bunch of settings (eg carrier numbers, the inhook and outhook commands) that don’t work on the Kniterate. To resolve this, CMU have published a script that takes in a knitout file and adapts it for the kniterate specifically, which we are also using (more below).</p>
+
+<h2 id="attempt-1--stripes">attempt 1 – stripes</h2>
+
+<p><span class="marginnote">
+	 <video width="240" controls="">
+	  <source src="/~material/img/knitout/kniterate-slomo.mp4" type="video/mp4" />
+	</video><br />
+	slomo video I took of the machine running when we were trying to debug the waste section
+</span></p>
+
+<p>We used the example <a href="https://github.com/textiles-lab/knitout-examples/blob/master/sheet-stripes.js">‘sheet-stripes.js’</a> from the <a href="https://github.com/textiles-lab/knitout-examples/tree/master">knitout examples repo</a> to create the initial file. This file seems to come from an era predating the npm package, as it’s just printing out knitout line by line to a file. More <a href="https://knit.work/garter-stitch/">recent examples</a> instead use API calls to construct the knitout lines. Similarly, I think the API now has a way of writing files – we used a pipe to directly create the .k file. After some failed attempts with lots of waste yarn bunching, we changed it to be 40 stitches wide rather than 20 (we also changed the tension when we did this though, so it could have been either).</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ node stripes.js &gt; stripes-example.k
+</code></pre></div></div>
+
+<p>In order to adapt this for the machine, we then use some of the backend tools. First, we use the knitout-alter-kniterate file, from the knitout-kniterate backend <a href="https://github.com/textiles-lab/knitout-backend-kniterate/tree/master/extras">extras</a> folder, to take the original knitout file and adapt it for the kniterate. (input: <code class="language-plaintext highlighter-rouge">stripes-example.k</code>, output <code class="language-plaintext highlighter-rouge">stripes-example-kniterate.k</code>)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ node knitout-alter-kniterate.js
+</code></pre></div></div>
+
+<p>We used the following settings for the machine:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Roller advance: 450
+Roller advance for transfers: 0
+Main stitch number: 6
+Stitch number for transfers: 5
+Main speed number: 300
+Speed number for transfers: 100
+Would you like to change any carriers: n
+</code></pre></div></div>
+<p><span class="marginnote">
+	<img src="/~material/img/knitout/final-waste-2.png" />the added waste section, in the knitout visualiser
+</span></p>
+
+<p>We then used the waste-section.js file (in the same folder) to prepend a waste section to the file. Sometimes depending on the settings used (this happened when we used the ‘0’ setting on the cast on style; was fine otherwise), the file that this creates can skip out one of the knitout commands needed to bring in a carrier; we resolved this by manually editing the file to add the line <code class="language-plaintext highlighter-rouge">in 3</code> to bring the third carrier in. (input: <code class="language-plaintext highlighter-rouge">stripes-example-kniterate.k</code>, output <code class="language-plaintext highlighter-rouge">stripes-example-kniterate-waste.k</code>).</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ node waste-section.js
+</code></pre></div></div>
+<p>It took us a few attempts to get the tension right – here are the settings used when we got it to work.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Roller advance: 100
+Stitch number: 5 --&gt; this turned out to maybe be quite important
+Speed number: 150
+Carrier to use for waste yarn: 6 --&gt; this is our waste yarn
+Carrier to use for draw thread: 1 --&gt; draw thread yarn
+Cast on style: Open tube
+</code></pre></div></div>
+
+<p>We then used the knitout-frontend visualiser to check that the file looks okay. I ran the visualiser locally, but to be honest it would probably be exactly the same using the online version.</p>
+
+<p><span class="marginnote">
+	<img src="/~material/img/knitout/knitout.png" />
+	<img src="/~material/img/knitout/kcode.png" />
+	knitout (top) and equivalent kcode (bottom) for waste yarn section
+</span></p>
+
+<p>The final step is to use the the knitout-to-kcode file to transform the final file (knitout -&gt; kniterate -&gt; waste yarn) into a .kc file, which makes it ready to run on the kniterate machine. This complained a bit but was otherwise fine – though it did throw an error on the times where we were missing the <code class="language-plaintext highlighter-rouge">in 3</code> command to bring in the third carrier.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node knitout-to-kcode.js extras/stripes-example-kniterate-waste.k stripes.kc
+</code></pre></div></div>
+
+<p>I hadn’t looked at a kcode file before, they’re a super interesting format.</p>
+
+<figure>
+	<img src="/~material/img/knitout/stripes-sample-1.jpg" alt="main" />
+	<span class="mainnote">a few sample attempts, chained together -- the orange is waste yarn, and the green is the start of the stripes section. by later versions the waste section had improved a lot, but the stripe change was still causing issues</span>
+</figure>
+
+<p>Our first attempts were not wildly successful, but we did end up learning a lot. Because the kniterate machine can already be a bit sensitive, it’s unclear often what’s issues with the file vs the machine being quite particular/temperamental about the way it wants to do things. After a lot of wrangling the waste yarn, in the end our main issues came with bringing the second stripe in – but this could have had more with the way the kniterate was moving the plates with the carriage than anything else.</p>
+
+<p><span class="marginnote">
+	<img src="/~material/img/knitout/waste-end-question.png" alt="stitch difference between waste and main yarn" />the main section is one stitch wider?
+</span></p>
+
+<p>What was very helpful was going through the entire process – including at different points manually debugging the knitout files – and seeing the links between the code, the visualiser, and what was happening on the machine.</p>
+
+<h3 id="questionsthoughts-from-round-1">questions/thoughts from round 1</h3>
+
+<ul>
+  <li>how do you get the machine to bind off? Knitout has a command called ‘outhook’ – but this doesn’t work on the kniterate. Is there an equivalent?</li>
+  <li>why is the waste yarn addition 1 stitch less wide than the eventual pattern?</li>
+  <li>is there a major difference between what’s possible in the Python and JS packages? or the intention to be?</li>
+  <li>at present, because the code is spread across so many repositories but – in the case especially of the backend – seems to need to be quite interoperable, it feels a bit like version changes between different repos might introduce a lot of issues</li>
+</ul>
+
+<h2 id="attempt-2--testing-different-tools">attempt 2 – testing different tools</h2>
+
+<p>Today, I wanted to experiment with more recently developed JS-based tools that automate slightly more of the tasks. Repositories used in this round:</p>
+
+<ul>
+  <li><strong><a href="https://github.com/textiles-lab/knitout-examples/tree/master">knitout examples</a></strong> (like before – testing out more js files)</li>
+  <li>Gabrielle Ohlson’s <strong><a href="https://github.com/gabrielle-ohlson/knitout-image-processing">knitout image processing</a></strong> repository, which automatically generates waste section and bind-off, plus has some automated shaping tools</li>
+</ul>
+
+<h3 id="1--fairisle">1 – fairisle</h3>
+
+<p><span class="marginnote">
+	<img src="/~material/img/knitout/fairisle-image-script.jpg" />
+	generated with the fairisle image script
+</span></p>
+
+<p>The first pattern I tried to use was the fairisle generating file <code class="language-plaintext highlighter-rouge">fairisle-image.js</code> in the examples repository. Somewhat misleadingly, this file won’t work in the frontend visualsiser interface, as it makes calls to the local filesystem so has to be run using node.</p>
+
+<p>When I do use it in the correct way:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ node fairisle-image.js fairisle-test.png &gt; fairisle-test.k
+</code></pre></div></div>
+<p>It works really well. Another small note – transparent background pngs get read as black not white, which initially caused some issues, but when I made the background white it was fine.</p>
+
+<p>I didn’t try adding the waste / bindoff to this yet but thought it came out okay.</p>
+
+<h3 id="2--knitout-image-processing">2 – knitout image processing</h3>
+
+<p><span class="marginnote">
+	<img src="/~material/img/knitout/colourwork-test.png" />
+	results from image processing, with waste and bindoff
+</span></p>
+
+<p>This seems a <a href="https://gabrielle-ohlson.github.io/knitout-image-processing/#prompts">really promising</a> interface to do a bunch of different operations that previously were scattered across a lot of the different CMU repositories.</p>
+
+<p>Using the same image, I tried using the <code class="language-plaintext highlighter-rouge">knitify</code> file. The command line interface took me a minute to get used to – it ‘autopresses’ enter once you type a y/n for the yes/no questions, which I kept getting tripped up on. Knitify is launched using the following:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm run knitify
+</code></pre></div></div>
+
+<p>You then proceed to specify the file. This initially seemed more kniterate friendly, though the code for kniterate had a fatal bug encountered when changing the waste settings, caused by a typo (was also easily solved), which does indicate that this has probably been tested a bit more on the Shima.</p>
+
+<p>Once the bug was fixed, I kept getting a more persistent bug about the carriers:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Assertion failed: no carrier found for leftover needle: 100 (@ row 1)
+</code></pre></div></div>
+
+<p>It still allowed me to write out the file, but this is something I want to try fixing. There is also a more general carrier issue, in that it doesn’t let you specify which carrier you want to use for what during the setup. At least for us, on the Kniterate, carriers 1 and 6 are reserved for the draw thread and waste yarn specifically, but in this instance carriers 1 and 2 are automatically used for the pattern.</p>
+
+<p>&lt; tests of this coming soon &gt;</p>
+
+<h3 id="3--autoknit">3 – autoknit</h3>
+
+<p>For the third set of tests, we wanted to experiment with the <a href="github.com/textiles-lab/autoknit">autoknit</a> repository, which can be used to turn 3D meshes into corresponding knitting patterns. This is probably the arena where it feels most difficult to adapt to working with the kniterate, though also poses a lot of really interesting questions. Without thorougly testing these it feels hard to draw conclusions but also I wanted to document where we’d got to.</p>
+
+<h3 id="process">process</h3>
+
+<p>We follow the process outlined in the <a href="https://github.com/textiles-lab/autoknit">autoknit</a> repository – reproduced here in a condensed form (with example .obj file ‘simple cone’). Somewhat messily, I worked with everything inside the <code class="language-plaintext highlighter-rouge">dist</code> folder – I’d probably like to move it into its own folder in the future.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1- create the constraints:
+$ ./interface obj:simple-cone.obj constraints:simple-cone.cons
+
+2- use the constraints to make the mesh
+$ ./interface obj:simple-cone.obj load-constraints:simple-cone.cons obj-scale:20.0 stitch-width:3.66 stitch-height:1.73 save-traced:simple-cone.st
+
+3- scheduling
+$ ./schedule st:simple-cone.st js:simple-cone.js
+
+* after this step! modify the JS file for kniterate as below*
+
+4- make knitout
+NODE_PATH=.. node simple-cone.js out:simple-cone.k
+</code></pre></div></div>
+
+<p><span class="marginnote">
+	<img src="/~material/img/knitout/cone-placement.png" />
+	placing constraints on the cone
+</span></p>
+
+<p>The placing of the constraints was the most tricky to get used to as the instructions were a little confusing.</p>
+
+<ol>
+  <li>place a constraint by pressing ‘c’</li>
+  <li>press ‘c’ again and move the mouse, to drag a line out and place the <em>next</em> constraint</li>
+  <li>click to finish the line, then repeat steps 2 and 3</li>
+  <li>once the lines are added, order them by pressing the plus and minus keys. not sure of best ordering strategy yet (need to test this)</li>
+</ol>
+
+<p><span class="marginnote">
+	<img src="/~material/img/knitout/cone-peeling.png" />
+	peeling the cone
+</span></p>
+
+<p>When we talked about these first files, B thought that even more than previously, these files seemed very Shima-y. A bit later, this was confirmed when I came across the following paragraph in Gabrielle Ohlson’s <a href="https://github.com/textiles-lab/knitout-backend-kniterate">knitout-backend-kniterate</a> repository:</p>
+
+<blockquote>
+  <p><em>You may have come across autoknit, an exciting project by the Textiles Lab that converts 3D meshes to knitout. As of now, autoknit doesn’t play too nicely with the kniterate, since the kniterate is lacking some features that make 3D-knitting a bit difficult (e.g. high-level take-down mechanisms [sinkers], consistently reliable transfer-mechanisms [sliders], etc.). With the hope of some day figuring it out, autoknit-kniterate.js was created so that autoknit can at least produce files that will safely run on the kniterate</em></p>
+</blockquote>
+
+<p>We followed the steps she suggests:</p>
+<ul>
+  <li>move <code class="language-plaintext highlighter-rouge">autoknit-kniterate.js</code> into the node_modules folder within autoknit</li>
+  <li>after producing the js file (step 3), open that js file in a text-editor and change this line of code (line #1): <code class="language-plaintext highlighter-rouge">const autoknit = require('autoknit-yarns');</code> to this: <code class="language-plaintext highlighter-rouge">const autoknit = require('autoknit-kniterate');</code></li>
+</ul>
+
+<p>Here’s the difference between the two files, when viewed in the visualiser:</p>
+
+<figure width="400">
+	<div class="subfig">
+		<img src="/~material/img/knitout/cone-shima.png" alt="april" />
+		<span class="mainnote">cone not adapted for kniterate</span>
+	</div>
+	<div class="subfig">
+		<img src="/~material/img/knitout/cone-kniterate.png" alt="august" />
+		<span class="mainnote">cone adapted for kniterate</span>
+	</div>
+</figure>
+
+
+	</div>
+
+</div>
+
+</body>
+</html>

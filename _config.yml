@@ -22,3 +22,5 @@ collections:
       - ktrg.md
   talks:
     output: true
+  posts:
+    output: true

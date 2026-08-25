@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>material programming research project</title>
+	<link rel="stylesheet" type="text/css" href="/~material/css/main.css">
+	<script>
+		window.goatcounter = {
+			path: function(p) { return location.host + p }
+		}
+	</script>
+	<script data-goatcounter="https://agnescam.goatcounter.com/count"
+	 async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+<div class="post-container">
+	<p>
+		/\\/o\/\\/o\/\\/o\/\\/\o\/<span class="spacer"></span><a class="header-link" href="/~material/index.html">home</a><br>
+		//\o/\//\o/\//\o/\//\/o/\/<span class="spacer"></span><a class="header-link" href="/~material/blog.html">blog</a><br>
+		\/\\o/\/\\o\\/\\o\\/\\/o\\<span class="spacer"></span><a class="header-link" href="/~material/people.html">people</a><br>
+		\//o\/\//o//\//o//\//\o//\<span class="spacer"></span><a class="header-link" href="/~material/projects.html">projects</a><br>
+	</p>
+
+	<h1>knitout-js cheatsheet</h1>
+	<div class="text-content">
+		<p>For the <a href="https://cci.arts.ac.uk/~material/">material programming</a> workshops, we have made an <a href="https://agnescameron.github.io/knitout-visualizer-kniterate/">adapted version</a> of CMU’s <a href="https://textiles-lab.github.io/knitout-live-visualizer/">original</a> Knitout visualiser, that allows you to write javascript code and export directly to files that run on the Kniterate machine. The visualiser uses a Javascript library called knitout, which allows you to write code that can be translated to run on a knitting machine.</p>
+
+<!-- This page starts with a cheatsheet (just below), and further down is a walkthrough of loading the interface and writing a file. Below that is a set of examples. -->
+
+<h2 id="knitout-js-commands">knitout-js commands</h2>
+
+<p>This table is adapted from the longer guide in the <a href="https://github.com/textiles-lab/knitout-frontend-js">knitout-frontend-js</a> repository, and contains just the most important operations. The links go to the info pages on Gabrielle Ohlson’s <a href="https://knit.work">knit.work</a> website, which also has some really helpful animations.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>command</th>
+      <th>arguments</th>
+      <th>example</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://knit.work/knit/">knit</a></td>
+      <td><code class="language-plaintext highlighter-rouge">direction</code>, <code class="language-plaintext highlighter-rouge">bed+needle</code>, <code class="language-plaintext highlighter-rouge">carrier</code></td>
+      <td><code class="language-plaintext highlighter-rouge">knit("+","f10","3")</code></td>
+      <td>Knit a stitch, on <strong>bed</strong> at <strong>needle</strong>, in <strong>direction</strong>, using <strong>carrier</strong></td>
+    </tr>
+    <tr>
+      <td><a href="https://knit.work/tuck/">tuck</a></td>
+      <td><code class="language-plaintext highlighter-rouge">direction</code>, <code class="language-plaintext highlighter-rouge">bed+needle</code>, <code class="language-plaintext highlighter-rouge">carrier</code></td>
+      <td><code class="language-plaintext highlighter-rouge">tuck("+","f10","3")</code></td>
+      <td>Tuck a stitch, on <strong>bed</strong> at <strong>needle</strong>, in <strong>direction</strong>, using <strong>carrier</strong></td>
+    </tr>
+    <tr>
+      <td><a href="https://knit.work/transfer/">xfer</a></td>
+      <td><code class="language-plaintext highlighter-rouge">from bed+needle</code>, <code class="language-plaintext highlighter-rouge">to bed+needle</code></td>
+      <td><code class="language-plaintext highlighter-rouge">xfer("f10","b10")</code></td>
+      <td>Transfer loops from <strong>from bed</strong> at <strong>needle</strong> to  <strong>to bed</strong> at <strong>needle</strong></td>
+    </tr>
+    <tr>
+      <td><a href="https://knit.work/rack/">rack</a></td>
+      <td><code class="language-plaintext highlighter-rouge">rack value</code>(Number)</td>
+      <td><code class="language-plaintext highlighter-rouge">rack(1)</code></td>
+      <td>Translate the back bed relative to the front bed by <strong>rack value</strong> needle units. The default racking is zero – Kniterate machines also support racking by 0.5 (needed to knit with both beds)</td>
+    </tr>
+    <tr>
+      <td><a href="https://knit.work/drop/">drop</a></td>
+      <td><code class="language-plaintext highlighter-rouge">bed+needle</code></td>
+      <td><code class="language-plaintext highlighter-rouge">drop("f10")</code></td>
+      <td>Drop loops from <strong>bed+needle</strong> (if you can’t be bothered to cast off)</td>
+    </tr>
+    <tr>
+      <td>in</td>
+      <td><code class="language-plaintext highlighter-rouge">carrier</code></td>
+      <td><code class="language-plaintext highlighter-rouge">in("5")</code></td>
+      <td>Bring in yarn carrier <strong>carrier</strong></td>
+    </tr>
+    <tr>
+      <td>out</td>
+      <td><code class="language-plaintext highlighter-rouge">carrier</code></td>
+      <td><code class="language-plaintext highlighter-rouge">out("6")</code></td>
+      <td>Take out yarn carrier <strong>carrier</strong> (not strictly necessary on kniterate and can cause issues – only do this right at the end)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Here’s how the beds, needle numbers and carriage directions correspond to the knitting machine. Note that needles with the same ‘number’ will be opposite one another, and the positive and negative directions are the <em>same</em> for both beds.</p>
+
+<figure>
+	<img src="/~material/img/knitout-cheatsheet/kniterate-diagram.jpg" alt="main" />
+</figure>
+
+<h3 id="kniterate-specific-rules">kniterate-specific rules</h3>
+
+<ul>
+  <li>carriers on the Kniterate are numbered “1” to “6” – you can’t have other numbers</li>
+  <li>you should rack by either a whole number, or by 0.5</li>
+  <li>don’t put more than two tuck stitches on top of each other (machine will get stressed out – this is a general machine thing)</li>
+  <li>don’t start at needle zero! try and center your design on the bed try 50 to start with</li>
+</ul>
+
+<h3 id="filetype-guide">filetype guide</h3>
+
+<p>Using the visualiser allows you to <em>write</em> Javascript, which is transformed into KCode that runs on the knitting machine. It does this by first translating the Javascript into another language called Knitout, in which each line is a single instruction to the machine. Javascript is easier to read than Knitout, which is easier again to read than KCode.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>file type</th>
+      <th>ending</th>
+      <th>usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="/img/kniterate-code/waste-test.kc">kcode</a></td>
+      <td>.kc</td>
+      <td>the file that the kniterate machine runs. Needs to be called ‘command.kc’ in the</td>
+    </tr>
+    <tr>
+      <td>javascript</td>
+      <td>.js</td>
+      <td>code that’s written or loaded into the editor that creates knitting files, based on the <em>knitout</em> library.</td>
+    </tr>
+    <tr>
+      <td><a href="/img/kniterate-code/waste-test.k">knitout</a></td>
+      <td>.k</td>
+      <td>this is the file that translates between the javascript code and the kcode that runs on the kniterate</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ## using the interface
+
+The knitout visualiser has 2 sides -- one to write code (either in Javascript, or directly in knitout), the other to see the results. It will load with an example -- you can either edit this, delete everything and start from scratch, or load a file into the interface from your computer.
+
+
+### how to think about knitout js
+you must specify every stitch. this is cool and also annoying.
+
+Here's how to do 1 stitch:
+
+Here's how to do 2 stitches:
+
+### knitting a row
+
+You can keep going like this for a bit
+
+Then you need to do the reverse
+
+
+### transferring between beds
+
+
+### waste section
+
+
+### bindoff
+
+
+## common issues
+
+
+
+## examples
+
+These examples are adapted for the Kniterate from files in CMU's []()
+
+### 1x1 rib
+
+Transfers
+
+### checkerboard
+
+
+### challenges
+
+
+## more information -->
+
+	</div>
+
+</div>
+
+</body>
+</html>

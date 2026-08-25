@@ -1,0 +1,16 @@
+---
+layout: main
+title: blog
+image: /img/cast-on-1-by-1-rib.jpg
+---
+
+{% assign posts = site.posts | sort: date | reverse %}
+{% for post in posts %}
+	{% if post.status == 'published' %}
+		<div class="proj-item">
+		{{ post.date | date: "%d/%m/%Y" }} <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }} → </a><br>
+			<p>{{ post.description }} </p>
+			<img class="thumb" src="{{ post.image | prepend: site.baseurl }}"/>
+		</div>
+	{% endif %}
+{% endfor %}

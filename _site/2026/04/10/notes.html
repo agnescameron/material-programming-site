@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>material programming research project</title>
+	<link rel="stylesheet" type="text/css" href="/~material/css/main.css">
+	<script>
+		window.goatcounter = {
+			path: function(p) { return location.host + p }
+		}
+	</script>
+	<script data-goatcounter="https://agnescam.goatcounter.com/count"
+	 async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+<div class="post-container">
+	<p>
+		/\\/o\/\\/o\/\\/o\/\\/\o\/<span class="spacer"></span><a class="header-link" href="/~material/index.html">home</a><br>
+		//\o/\//\o/\//\o/\//\/o/\/<span class="spacer"></span><a class="header-link" href="/~material/blog.html">blog</a><br>
+		\/\\o/\/\\o\\/\\o\\/\\/o\\<span class="spacer"></span><a class="header-link" href="/~material/people.html">people</a><br>
+		\//o\/\//o//\//o//\//\o//\<span class="spacer"></span><a class="header-link" href="/~material/projects.html">projects</a><br>
+	</p>
+
+	<h1>lab notes 5</h1>
+	<div class="text-content">
+		<p>It’s been a few weeks since I’ve had a chance to write up notes on Material Programming, mostly because a lot of different things have been happening. Some of them I’ve written about here:</p>
+<ul>
+  <li>I finished the first draft of the Kniterate-Knitout visualiser <a href="#kniterate-knitout-visualiser">→</a></li>
+  <li>My friend Jake presented his PhD thesis on modular open-source manufacturing <a href="#the-end-of-gcode">→</a></li>
+  <li>Ink &amp; Switch came to visit both Chelsea’s Smart Textiles Lab and the CCI <a href="#ink--switch-visit">→</a></li>
+</ul>
+
+<p>I also made a bunch of updates to the Material Programming <a href="https://cci.arts.ac.uk/~material/">site</a>, which now gives a better idea of our current work and direction.</p>
+
+<h2 id="kniterate-knitout-visualiser">Kniterate-Knitout Visualiser</h2>
+
+<p><span class="marginnote">
+	<img src="/~material/img/kniterate-5/visualiser-works.png" />
+	the visualiser with waste section selected
+</span></p>
+
+<p>In preparation for the second material programming workshop (which will take place at the start of May), I finished the first version of the <a href="https://agnescameron.github.io/knitout-visualizer-kniterate/">forked CMU visualiser</a>, adapted for the Kniterate machine. (here’s the <a href="https://textiles-lab.github.io/knitout-live-visualizer/">original</a>). I also wrote a cheatsheet <a href="/2026/04/09/cheatsheet.html">guide</a> to the tool and a couple of example scripts.</p>
+
+<p>The main changes I made were to add a KCode export button (very easy!) and to add an automatic waste-section addition (more difficult!). In both cases, I was adding existing scripts from Gabrielle Ohlson’s <a href="https://github.com/textiles-lab/knitout-backend-kniterate">knitout-backend-kniterate</a> repository into the visualiser.</p>
+
+<p>What was great about all of this is that it was possible to do everything client-side. After some tidying of scripts in the repository, I added in the <a href="https://github.com/textiles-lab/knitout-backend-kniterate/blob/master/knitout-to-kcode.js">knitout-to-kcode</a> script almost verbatim, calling it after the JS parsing step to export straight to the KCode format that the Kniterate takes.</p>
+
+<h3 id="reworking-the-waste-section">Reworking the Waste Section</h3>
+
+<figure>
+	<img src="/~material/img/kniterate-5/waste-sketch.jpg" alt="main" />
+	<span class="mainnote">planning out the waste section</span>
+</figure>
+
+<p>The waste section was more challenging, as I wanted to use something more similar to the kniterate editor’s waste section, and had also been encountering a bunch of bugs in using the original script, something I talked about in the <a href="/2026/04/01/transfers.html">last post</a>.</p>
+
+<p><span class="marginnote">
+	<img src="/~material/img/kniterate-5/multi-tuck.png" />
+	Testing integrating multiple working yarns in the waste section
+</span></p>
+
+<p>I decided to significantly refactor the code, adding in some functions to keep track of carrier state, to avoid the issue where a row would be brought in in the wrong direction. I wanted the waste section to be largely invariant to the cast-on direction of the eventual piece, and also to be able to integrate an arbitrary number of yarns that would be brought into work further up in the sample – I spent a bit of time integrating these in the waste section so they’d always end up on the correct side.</p>
+
+<p>I was pretty pleased with the results in the end, it’s satisfying to click the waste section box and see all the relevant stitches appear, and I really understand how the code works now. This is a bit of a placeholder though – ideally I’d like to make a fork of the knitout-frontend-js parser that abstracts stuff like waste sections and bindoffs into callable functions, rather than relying on buttons in the interface (after all, the button isn’t very <em>malleable</em>).</p>
+
+<h3 id="racking">Racking</h3>
+
+<p><span class="marginnote">
+	<img src="/~material/img/kniterate-5/rack-0.png" />
+	<img src="/~material/img/kniterate-5/rack-05.png" />
+	Knitting every other front and back bed needle on 0 racking (needles directly face each other) for a 1x1 rib (top) vs 0.5 racking (‘half pitch’) to knit both beds
+</span></p>
+
+<p>One minor but interesting issue I came across was a mismatch in assumptions about how racking works between the Shima and Kniterate machines. <a href="https://knit.work/rack/">Racking</a> is an operation where the front bed is moved relative to the back bed. In normal operation, needles sit directly opposite one another (racking 0), but if you want to knit with same-numbered needles on both beds in the same row (e.g. for the ‘both beds’ row during cast-on) then they need to be offset by some fraction of a stitch to avoid hitting each other. Racking by more than one stitch can also be used to create cabling effects, where knitted stitches on the front are moved relative to the stitches on the back bed.</p>
+
+<p>The underlying validation in the JS-&gt;Knitout code wants the rack offset to be either an integer number of stitches, or some integer+0.25 – my vague theory is that Shimas use .25 increments because they can have 4 beds, though I don’t know if that’s true. The Knitout-&gt;Kniterate validator wants you to rack by 0.5 stitches, which is also what the Kniterate machine likes. It’s a minor point but so interesting to encounter the way that certain machines can end up ‘baked in’ to the software in really subtle ways.</p>
+
+<h3 id="knitscript-first-encounters">Knitscript first encounters</h3>
+<p>As I was working on the waste section code, I was starting to draw up a list of things I thought were missing from knitout-js, namely:</p>
+
+<ul>
+  <li>a representation of the machine ‘state’, in particular the position of the carriers</li>
+  <li>a way of writing higher-level commands, like “4 rows of interlock” “2x2 rib” without needing to specify everything at the stitch level</li>
+  <li>some kind of abstract ‘model’ of the machine, so things like the desired racking can be expressed as part of a driver or config file</li>
+</ul>
+
+<p>I’d also had the <a href="https://dl.acm.org/doi/abs/10.1145/3586183.3606789">Knitscript</a> paper saved for a while, and excitingly, this is exactly what it’s about. Knitscript also came out of CMU – Megan Hoffman and Lea Albaugh are the two lead authors. Knitscript introduces a bunch of new abstractions on top of knitout, managing the state of the knit machine as an extension of the Python interpreter’s state. It works by executing instructions on a virtual model of the machine, which also has a model of what makes a ‘stable’ piece of knitted fabric.</p>
+
+<p>I found that I couldn’t get the code working out of the box, and got the sense that it had been refactored, but without the instructions changing. The fixes weren’t that exciting – if you wanted to replicate them, I documented the changes in an <a href="https://github.com/mhofmann-Khoury/knit_script/issues/17">issue</a> and made a <a href="https://github.com/mhofmann-Khoury/knit_script/pull/18">pull request</a> with some updates to the initial instructions.</p>
+
+<p>Just from reading the paper, they do seem to make a number of assumptions that mean that this won’t work out of the box on Kniterate machines – such as automatic carrier handling using the <code class="language-plaintext highlighter-rouge">inhook</code> and <code class="language-plaintext highlighter-rouge">outhook</code> Knitout commands, which don’t translate into knitout operations. Writing a kniterate driver for this might be very interesting!</p>
+
+<h2 id="the-end-of-gcode">The End of GCode</h2>
+<p><span class="marginnote">
+	<img src="/~material/img/kniterate-5/gcode-meme.png" />
+	gcode memes :)
+</span></p>
+
+<p><a href="https://ekswhyzee.com/about">Jake</a> is an old friend from the Media Lab, and it was really lovely and exciting to watch his PhD defence at the start of April. His PhD was in the <a href="https://cba.mit.edu/">Center for Bits and Atoms</a>, and explored the use of modules and models to represent the state of machines, as the basis for recasting machine control as a constrained optimisation task.</p>
+
+<p>It was really cool hearing him talk in detail about the material concerns of creating abstract models of machining processes. Sometimes I can feel like people are really excited about the idea of creating a new <em>paradigm</em> for doing hard things (like making abstract representations of machines) and then much less enamoured with the inevitable translation work involved in adapting these representations to actually work in reality (I feel similarly every time someone claims to have solved schema-translation problems!). That interface between physics and standards is where so many cool things happen.</p>
+
+<p>The presentation focussed on two examples of integrating feedback between machine state and instructions:</p>
+<ul>
+  <li>optimising endmill temperature and speed in CNC machining</li>
+  <li>optimising extrusion stability in a 3D printer</li>
+</ul>
+
+<p>In both cases, Jake uses constraint solvers to optimise the process a particular material and part, at the fastest rate that will keep the machine happy. The 3D printing example was particularly funky as it involved a bunch of rheology to understand the forces in the extruder, modelling the behaviour of molten materials. The feedback idea was particularly appealing in this context – instead of needing to produce a number of samples to calibrate each time, a more general model of the material could be used.</p>
+
+<figure class="fullwidth">
+	<img src="/~material/img/kniterate-5/workflow-comparison.png" alt="main" />
+	<span class="mainnote">comparing manual and feedback-based 3d printing workflows</span>
+</figure>
+
+<p>One of the most interesting parts was how he talked about how this could generalise, and also why this was a particularly interesting thing to be working on now. Lots of the optimisation work was based on <a href="https://docs.jax.dev/en/latest/">Jax</a>, which allows the definition of large and arbitrary cost functions. The advent of LLMs has also led to a remarkable increase in the power and availability of general-purpose optimisation tools like <a href="https://github.com/HIPS/autograd">Autograd</a>, and just-in-time compilation.</p>
+
+<p>What was also super impressive about this project was how many of the tools used were made from scratch – like the retrofittable <a href="https://clank.tools/">clank!</a> machine controllers, and the <a href="https://osap.tools/">OSAP</a> ‘Osap Systems Assembly Protocol’, which allows arbitrary pieces of modular hardware to be networked and integrated together as a single system.</p>
+
+<p><span class="marginnote">
+	<img src="/~material/img/kniterate-5/osap.png" />
+	neat OSAP protocol diagram
+</span></p>
+
+<p>There were also a bunch of really nice concepts I’d not come across before. One was out-of-band insrumentation – the use of measurements of proxies for what’s happening when you can’t measure something directly, like listening to the sounds a machine makes to make inferences about how the motors are doing. It was also really interesting hearing about which processes weren’t amenable to this kind of feedback – like scaled-up semiconductor manufacturing, where repeatable and extremely fast feed-forward processes take precedence.</p>
+
+<p>When asked at the end what determines whether something is easier or harder to represent in this manner, the response was that “it depends on how differentiable the process is”. It made me think about how this kind of work might apply to knit, especially in working out things like tension control for smaller-batch processes. It’s cool to see tools designed for the median user (who is making a small amount of something), rather than the most expensive one.</p>
+
+<p>Jake we love you! Super cool!</p>
+
+<h2 id="ink--switch-visit">Ink &amp; Switch Visit</h2>
+<p>After we spoke at the <a href="https://www.inkandswitch.com/">Ink &amp; Switch</a> meetup last December, <a href="https://www.pvh.ca/">Peter van Hardenberg</a> asked if he could come return the favour and talk at the CCI while he was in London in April. We also arranged a visit for a few of his collaborators at ARIA to come and see the Smart Textiles Lab in Chelsea, and showed them the Kniterate and some of the projects we’d been working on.</p>
+
+<p>During Peter’s Chelsea visit, we talked a lot about what it means to abstractly represent machines – how to do this well, and also how to make use of mathematical abstractions like lenses as representational frames. He also used their new tool <a href="https://www.inkandswitch.com/project/patchwork/">Patchwork</a> to create a fork of the knitout visualiser, which was a really exciting way of dealing with client-side code.</p>
+
+<p>In the talk Peter gave at the CCI the next day, he talked a lot about the tools they work on at I&amp;S, and their philosophy toward toolmaking more generally. I’ve been a big fan of Ink &amp; Switch’s work since encountering their essay <a href="https://www.inkandswitch.com/cambria">Cambria</a> while working on schema design at Knowledge Futures back in 2020, and it’s been really exciting to see how their work – and the way they articulate their work – has developed over the past few years.</p>
+
+<p>There were some really lovely parts, including Peter’s articulation of the average computer being ‘less a bicycle for the mind, more of an aircraft carrier’, and totally unsuitable for the needs of the average user. He also encouraged everyone present to seek out ‘narrow waists’ to have as a compilation target for projects – text files being a great example.</p>
+
+<p>I also really enjoyed the line: “you are in a contested space whenever you use technology”. I think a lot about how wasteful contemporary technology is, and how oriented around profit motives rather than social value, even in really basic assumptions. Questioning these or trying to think otherwise can take up loads of time, and it’s not always clear at the outset whether you’re just being stubborn, or actually have a point. I suppose the important thing is to insist on what you think is right.</p>
+
+<p>Afterward I felt a renewed enthusiasm for pushing the limits of the knitout visualiser interface rather than immediately pushing on to something ‘more serious’.</p>
+
+<h2 id="further-thoughts">further thoughts</h2>
+
+<p>I linked these things together because to me they feel very related – I left Jake’s talk feeling very inspired by some of the possibilities that exist <em>now</em> to do old things but in interesting ways, and for how exciting things like manufacturing can be when you think about how to optimise for small and open-source use. Similarly I’m feeling a renewed enthusiasm for the browser, and client-based sites. I can get very bogged down in the limitations of these things sometimes, and it’s nice to have that refreshed.</p>
+
+<p>While I’m excited to play with Knitscript, hearing Peter’s talk has given me a renewed enthusiasm for spending a bit more time with browser-based knit tools and the idea of doing things in the client more generally and also push it a bit. I want to try some async code, include fetch requests, just find it’s limits a bit before pushing on to the next thing.</p>
+
+<p>That said, I do want to spend some time with Knitscript and get a better sense for how it’s put together, I think it does a lot of things that I’d really enjoy. I’m also really excited for the first workshop, and to see what the students do with the work. I’m taking a lot of inspiration from a course my friend Dan teaches called <a href="https://www.arch.columbia.edu/courses/86696-2111">Metatool</a>, aimed at architectural computation students making their own architectural tools.</p>
+
+
+	</div>
+
+</div>
+
+</body>
+</html>

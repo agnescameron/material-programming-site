@@ -9,7 +9,7 @@ We are working on a number of parallel projects to develop research and practice
 </p> -->
 
 {% assign projects = site.projects | sort: date | reverse %}
-{% for project in projects limit:5 %}
+{% for project in projects %}
 	{% if project.status == 'published' %}
 		<div class="proj-item">
 		<a href="{{ project.url | prepend: site.baseurl }}">{{ project.title }} → </a><br>

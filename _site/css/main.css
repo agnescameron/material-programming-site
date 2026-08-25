@@ -31,6 +31,12 @@ li {
 	margin-bottom: 50px;
 }
 
+.post-container {
+	max-width: 800px;
+	margin: 15px;
+	margin-bottom: 50px;
+}
+
 .spacer {
 	display: inline-block;
 	width: 20px;
@@ -45,10 +51,15 @@ li {
 	max-width: 500px;
 }
 
-.text-content p, ul {
+.text-content p, ul, ol {
 	font-size: 0.9em;
 	list-style-type: none;
 }
+
+.text-content ol {
+	font-size: 0.9em;
+}
+
 
 ul {
 	margin-left: 0px !important;
@@ -65,4 +76,323 @@ ul {
 
 .proj-item {
 	margin-top: 40px;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    width: 55%;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0; 
+}
+
+.numeral {
+    font-family: et-book-roman-old-style; 
+}
+
+.danger {
+    color: red; 
+}
+
+article {
+    padding: 5rem 0rem; 
+}
+
+section {
+    padding-top: 1rem;
+    padding-bottom: 1rem; 
+}
+
+audio {
+    display: block;
+}
+
+
+/*blockquote {
+    font-size: 1.2rem; 
+}*/
+
+blockquote p {
+    width: 85%;
+    margin-right: 20px; 
+}
+
+blockquote footer {
+    width: 55%;
+    /*font-size: 1.1rem;*/
+    text-align: right; 
+}
+
+section > p,
+section > footer,
+section > table {
+    width: 55%; 
+}
+
+section > .topnote {
+    width: calc(55% - 20px); 
+}
+
+/* 50 + 5 == 55, to be the same width as paragraph */
+section > ol,
+section > ul {
+    width: 50%;
+    -webkit-padding-start: 5%; 
+}
+
+li:not(:first-child) {
+    margin-top: 0.25rem; 
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid black;
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  font-weight: bold;
+}
+
+figure {
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    /*max-width: 55%;*/
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+    margin: 0 0 3em 0; 
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+figcaption {
+    float: right;
+    clear: right;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    vertical-align: baseline;
+    position: relative;
+    max-width: 40%; 
+}
+
+figure.fullwidth figcaption {
+    margin-right: 24%; 
+}
+
+figure .mainnote {
+    flex-basis: 100%;
+    display: block;
+}
+
+/* Links: replicate underline that clears descenders */
+a:link,
+a:visited {
+    color: inherit; 
+}
+
+.no-tufte-underline:link {
+    background: unset;
+    text-shadow: unset;
+}
+
+a:link, .tufte-underline, .hover-tufte-underline:hover {
+    text-decoration: none;
+    background: -webkit-linear-gradient(#fffff8, #fffff8), -webkit-linear-gradient(#fffff8, #fffff8), -webkit-linear-gradient(currentColor, currentColor);
+    background: linear-gradient(#fffff8, #fffff8), linear-gradient(#fffff8, #fffff8), linear-gradient(currentColor, currentColor);
+    -webkit-background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
+    -moz-background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
+    background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
+    background-repeat: no-repeat, no-repeat, repeat-x;
+    text-shadow: 0.03em 0 #fffff8, -0.03em 0 #fffff8, 0 0.03em #fffff8, 0 -0.03em #fffff8, 0.06em 0 #fffff8, -0.06em 0 #fffff8, 0.09em 0 #fffff8, -0.09em 0 #fffff8, 0.12em 0 #fffff8, -0.12em 0 #fffff8, 0.15em 0 #fffff8, -0.15em 0 #fffff8;
+    background-position: 0% 93%, 100% 93%, 0% 93%; 
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    a:link, .tufte-underline, .hover-tufte-underline:hover {
+        background-position-y: 87%, 87%, 87%;
+    }
+}
+
+a:link::selection,
+a:link::-moz-selection {
+    text-shadow: 0.03em 0 #b4d5fe, -0.03em 0 #b4d5fe, 0 0.03em #b4d5fe, 0 -0.03em #b4d5fe, 0.06em 0 #b4d5fe, -0.06em 0 #b4d5fe, 0.09em 0 #b4d5fe, -0.09em 0 #b4d5fe, 0.12em 0 #b4d5fe, -0.12em 0 #b4d5fe, 0.15em 0 #b4d5fe, -0.15em 0 #b4d5fe;
+    background: #b4d5fe;
+}
+
+/* Sidenotes, margin notes, figures, captions */
+img {
+    max-width: 100%; 
+}
+
+
+.topnote {
+    font-style: italic;
+    padding: 10px;
+    border: 1px solid black;
+    max-width: 90%;
+    display:block;
+}
+
+.sidenote,
+.marginnote {
+    float: right;
+    clear: right;
+    margin-right: -60%;
+    width: 50%;
+    max-width: 300px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 0.7rem;
+    line-height: 1.2;
+    vertical-align: baseline;
+    position: relative;
+}
+
+.subfig,
+.subfigthird {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.subfig img,
+.subfigthird img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+span.mainnote {
+    font-size: 0.7rem;
+}
+
+.sidenote-number {
+    counter-increment: sidenote-counter; 
+}
+
+.sidenote-number:after,
+.sidenote:before {
+    /*font-family: et-book-roman-old-style;*/
+    position: relative;
+    vertical-align: baseline; 
+}
+
+.sidenote-number:after {
+    content: counter(sidenote-counter);
+    /*font-size: 1rem;*/
+    top: -0.5rem;
+    left: 0.1rem; 
+}
+
+.sidenote:before {
+    content: counter(sidenote-counter) " ";
+    /*font-size: 1rem;*/
+    top: -0.5rem; 
+}
+
+blockquote .sidenote,
+blockquote .marginnote {
+    margin-right: -82%;
+    min-width: 59%;
+    text-align: left; 
+}
+
+div.fullwidth,
+table.fullwidth {
+    width: 100%; 
+}
+
+code {
+    font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-size: 1rem;
+    line-height: 1.2;
+    -webkit-text-size-adjust: 100%; /* Prevent adjustments of font size after orientation changes in iOS. See https://github.com/edwardtufte/tufte-css/issues/81#issuecomment-261953409 */
+}
+
+pre > code {
+    font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-size: 1rem !important;
+    line-height: 1.2;
+    -webkit-text-size-adjust: 100%; /* Prevent adjustments of font size after orientation changes in iOS. See https://github.com/edwardtufte/tufte-css/issues/81#issuecomment-261953409 */
+}
+
+/*.sans > code {
+    font-size: 1.2rem; 
+}*/
+
+h1 > code,
+h2 > code,
+h3 > code {
+    font-size: 0.80em; 
+}
+
+.marginnote > code,
+.sidenote > code {
+    font-size: 1.2rem; 
+}
+
+pre > code {
+    font-size: 1.2rem;
+    width: 52%;
+    margin-left: 2.5%;
+    display: block;
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+pre.fullwidth > code {
+    width: 90%; 
+}
+
+.fullwidth {
+    max-width: 90%;
+    clear:both; 
+}
+
+span.newthought {
+    font-variant: small-caps;
+    /*font-size: 1.2rem; */
+}
+
+input.margin-toggle {
+    display: none; 
+}
+
+label.sidenote-number {
+    display: inline; 
+}
+
+label.margin-toggle:not(.sidenote-number) {
+    display: none; 
+}
+
+.iframe-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    padding-top: 25px;
+    height: 0; 
+}
+
+.iframe-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; 
 }
