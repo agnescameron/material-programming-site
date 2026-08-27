@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>material programming research project</title>
-	<link rel="stylesheet" type="text/css" href="/~material/css/main.css">
+	<link rel="stylesheet" type="text/css" href=".//css/main.css">
 	<script>
 		window.goatcounter = {
 			path: function(p) { return location.host + p }
@@ -17,10 +17,10 @@
 
 <div class="post-container">
 	<p>
-		/\\/o\/\\/o\/\\/o\/\\/\o\/<span class="spacer"></span><a class="header-link" href="/~material/index.html">home</a><br>
-		//\o/\//\o/\//\o/\//\/o/\/<span class="spacer"></span><a class="header-link" href="/~material/blog.html">blog</a><br>
-		\/\\o/\/\\o\\/\\o\\/\\/o\\<span class="spacer"></span><a class="header-link" href="/~material/people.html">people</a><br>
-		\//o\/\//o//\//o//\//\o//\<span class="spacer"></span><a class="header-link" href="/~material/projects.html">projects</a><br>
+		/\\/o\/\\/o\/\\/o\/\\/\o\/<span class="spacer"></span><a class="header-link" href=".//index.html">home</a><br>
+		//\o/\//\o/\//\o/\//\/o/\/<span class="spacer"></span><a class="header-link" href=".//blog.html">blog</a><br>
+		\/\\o/\/\\o\\/\\o\\/\\/o\\<span class="spacer"></span><a class="header-link" href=".//people.html">people</a><br>
+		\//o\/\//o//\//o//\//\o//\<span class="spacer"></span><a class="header-link" href=".//projects.html">projects</a><br>
 	</p>
 
 	<h1>lab notes 1</h1>
@@ -32,13 +32,13 @@
 <p>This post documents a number of early experiments with the CMU repository to see how easily we could get the knitout files working on our Kniterate machine.</p>
 
 <figure>
-	<img src="/~material/img/knitout/final-waste.png" alt="main" />
+	<img src=".//img/knitout/final-waste.png" alt="main" />
 	<span class="mainnote">an example knit file rendered in the knitout visualiser</span>
 </figure>
 
 <p><span class="marginnote">
-	<img src="/~material/img/knitout/vector-tiles.png" />
-	<!-- <img src="/~material/img/knitout/face-notes.png"/> -->
+	<img src=".//img/knitout/vector-tiles.png" />
+	<!-- <img src=".//img/knitout/face-notes.png"/> -->
 	big fan of the knitout visualiser stitch svg reference files
 </span></p>
 
@@ -62,7 +62,7 @@
 
 <p><span class="marginnote">
 	 <video width="240" controls="">
-	  <source src="/~material/img/knitout/kniterate-slomo.mp4" type="video/mp4" />
+	  <source src=".//img/knitout/kniterate-slomo.mp4" type="video/mp4" />
 	</video><br />
 	slomo video I took of the machine running when we were trying to debug the waste section
 </span></p>
@@ -88,7 +88,7 @@ Speed number for transfers: 100
 Would you like to change any carriers: n
 </code></pre></div></div>
 <p><span class="marginnote">
-	<img src="/~material/img/knitout/final-waste-2.png" />the added waste section, in the knitout visualiser
+	<img src=".//img/knitout/final-waste-2.png" />the added waste section, in the knitout visualiser
 </span></p>
 
 <p>We then used the waste-section.js file (in the same folder) to prepend a waste section to the file. Sometimes depending on the settings used (this happened when we used the ‘0’ setting on the cast on style; was fine otherwise), the file that this creates can skip out one of the knitout commands needed to bring in a carrier; we resolved this by manually editing the file to add the line <code class="language-plaintext highlighter-rouge">in 3</code> to bring the third carrier in. (input: <code class="language-plaintext highlighter-rouge">stripes-example-kniterate.k</code>, output <code class="language-plaintext highlighter-rouge">stripes-example-kniterate-waste.k</code>).</p>
@@ -108,8 +108,8 @@ Cast on style: Open tube
 <p>We then used the knitout-frontend visualiser to check that the file looks okay. I ran the visualiser locally, but to be honest it would probably be exactly the same using the online version.</p>
 
 <p><span class="marginnote">
-	<img src="/~material/img/knitout/knitout.png" />
-	<img src="/~material/img/knitout/kcode.png" />
+	<img src=".//img/knitout/knitout.png" />
+	<img src=".//img/knitout/kcode.png" />
 	knitout (top) and equivalent kcode (bottom) for waste yarn section
 </span></p>
 
@@ -121,14 +121,14 @@ Cast on style: Open tube
 <p>I hadn’t looked at a kcode file before, they’re a super interesting format.</p>
 
 <figure>
-	<img src="/~material/img/knitout/stripes-sample-1.jpg" alt="main" />
+	<img src=".//img/knitout/stripes-sample-1.jpg" alt="main" />
 	<span class="mainnote">a few sample attempts, chained together -- the orange is waste yarn, and the green is the start of the stripes section. by later versions the waste section had improved a lot, but the stripe change was still causing issues</span>
 </figure>
 
 <p>Our first attempts were not wildly successful, but we did end up learning a lot. Because the kniterate machine can already be a bit sensitive, it’s unclear often what’s issues with the file vs the machine being quite particular/temperamental about the way it wants to do things. After a lot of wrangling the waste yarn, in the end our main issues came with bringing the second stripe in – but this could have had more with the way the kniterate was moving the plates with the carriage than anything else.</p>
 
 <p><span class="marginnote">
-	<img src="/~material/img/knitout/waste-end-question.png" alt="stitch difference between waste and main yarn" />the main section is one stitch wider?
+	<img src=".//img/knitout/waste-end-question.png" alt="stitch difference between waste and main yarn" />the main section is one stitch wider?
 </span></p>
 
 <p>What was very helpful was going through the entire process – including at different points manually debugging the knitout files – and seeing the links between the code, the visualiser, and what was happening on the machine.</p>
@@ -154,7 +154,7 @@ Cast on style: Open tube
 <h3 id="1--fairisle">1 – fairisle</h3>
 
 <p><span class="marginnote">
-	<img src="/~material/img/knitout/fairisle-image-script.jpg" />
+	<img src=".//img/knitout/fairisle-image-script.jpg" />
 	generated with the fairisle image script
 </span></p>
 
@@ -171,7 +171,7 @@ Cast on style: Open tube
 <h3 id="2--knitout-image-processing">2 – knitout image processing</h3>
 
 <p><span class="marginnote">
-	<img src="/~material/img/knitout/colourwork-test.png" />
+	<img src=".//img/knitout/colourwork-test.png" />
 	results from image processing, with waste and bindoff
 </span></p>
 
@@ -217,7 +217,7 @@ NODE_PATH=.. node simple-cone.js out:simple-cone.k
 </code></pre></div></div>
 
 <p><span class="marginnote">
-	<img src="/~material/img/knitout/cone-placement.png" />
+	<img src=".//img/knitout/cone-placement.png" />
 	placing constraints on the cone
 </span></p>
 
@@ -231,7 +231,7 @@ NODE_PATH=.. node simple-cone.js out:simple-cone.k
 </ol>
 
 <p><span class="marginnote">
-	<img src="/~material/img/knitout/cone-peeling.png" />
+	<img src=".//img/knitout/cone-peeling.png" />
 	peeling the cone
 </span></p>
 
@@ -251,11 +251,11 @@ NODE_PATH=.. node simple-cone.js out:simple-cone.k
 
 <figure width="400">
 	<div class="subfig">
-		<img src="/~material/img/knitout/cone-shima.png" alt="april" />
+		<img src=".//img/knitout/cone-shima.png" alt="april" />
 		<span class="mainnote">cone not adapted for kniterate</span>
 	</div>
 	<div class="subfig">
-		<img src="/~material/img/knitout/cone-kniterate.png" alt="august" />
+		<img src=".//img/knitout/cone-kniterate.png" alt="august" />
 		<span class="mainnote">cone adapted for kniterate</span>
 	</div>
 </figure>

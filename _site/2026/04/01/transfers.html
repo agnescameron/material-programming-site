@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>material programming research project</title>
-	<link rel="stylesheet" type="text/css" href="/~material/css/main.css">
+	<link rel="stylesheet" type="text/css" href=".//css/main.css">
 	<script>
 		window.goatcounter = {
 			path: function(p) { return location.host + p }
@@ -17,10 +17,10 @@
 
 <div class="post-container">
 	<p>
-		/\\/o\/\\/o\/\\/o\/\\/\o\/<span class="spacer"></span><a class="header-link" href="/~material/index.html">home</a><br>
-		//\o/\//\o/\//\o/\//\/o/\/<span class="spacer"></span><a class="header-link" href="/~material/blog.html">blog</a><br>
-		\/\\o/\/\\o\\/\\o\\/\\/o\\<span class="spacer"></span><a class="header-link" href="/~material/people.html">people</a><br>
-		\//o\/\//o//\//o//\//\o//\<span class="spacer"></span><a class="header-link" href="/~material/projects.html">projects</a><br>
+		/\\/o\/\\/o\/\\/o\/\\/\o\/<span class="spacer"></span><a class="header-link" href=".//index.html">home</a><br>
+		//\o/\//\o/\//\o/\//\/o/\/<span class="spacer"></span><a class="header-link" href=".//blog.html">blog</a><br>
+		\/\\o/\/\\o\\/\\o\\/\\/o\\<span class="spacer"></span><a class="header-link" href=".//people.html">people</a><br>
+		\//o\/\//o//\//o//\//\o//\<span class="spacer"></span><a class="header-link" href=".//projects.html">projects</a><br>
 	</p>
 
 	<h1>lab notes 4</h1>
@@ -32,7 +32,7 @@
 <p>This past weekend, Rosie and I went to Knitworks to do a <a href="https://knitworkslondon.com/products/advanced-ribbing-attachment">workshop</a> on the Brother ribber. Neither of us had worked with one before, and it was really useful for getting a material understanding of what’s happening on a 2-bed machine.</p>
 
 <figure>
-    <img src="/~material/img/kniterate-3/5-by-5-rib.jpg" alt="main" />
+    <img src=".//img/kniterate-3/5-by-5-rib.jpg" alt="main" />
     <span class="mainnote">a plated 5x5 rib sample made on the Knitworks ribber. The ribbing pattern is made by transferring stitches between the front and back beds</span>
 </figure>
 
@@ -52,7 +52,7 @@ Setting the ribber up in my studio
 <p>This turned out to be easier said than done: the lines I’d added to the cast-on section messed up the carrier directions because I was bringing them in twice: once in the tucked section and once again in the kniterate-style introduction that I’d added. This meant that the carriers ended up on the ‘wrong’ side of the bed for the original code. In the end I ended up adding a few extra rows to hack this together so we had something to test with, but I’ll need to sort this out properly later on.</p>
 
 <figure style="max-width: 500px;">
-    <img src="/~material/img/kniterate-3/comparison-caston.jpg" alt="main" />
+    <img src=".//img/kniterate-3/comparison-caston.jpg" alt="main" />
     <span class="mainnote">comparing between a waste section from the kniterate editor (left) and the knitout code (right). Note the tucked draw thread and cast-on yarn at the bottom of the knitout-based sample</span>
 </figure>
 
@@ -64,10 +64,10 @@ Setting the ribber up in my studio
 
 <figure>
     <div class="subfig">
-        <img src="/~material/img/kniterate-3/cast-on.jpg" />
+        <img src=".//img/kniterate-3/cast-on.jpg" />
     </div>
     <div class="subfig">
-        <img src="/~material/img/kniterate-3/fishermans-rib.jpg" />
+        <img src=".//img/kniterate-3/fishermans-rib.jpg" />
     </div>
 	<span class="mainnote">sample of 1x1 rib (right) and fisherman's rib (left)</span>
 </figure>
@@ -109,7 +109,7 @@ k.rack(0.0);
 <p>This does something a bit different to the typical knitout bindoff, which doesn’t do this step of holding every other stitch on the back bed. B remarked that this method was ‘very shima-y’ (probably because it’s taken from the regular knitout examples), and the end result was somewhat distorted.</p>
 
 <figure>
-    <img src="/~material/img/kniterate-3/original-bindoff.jpg" alt="main" />
+    <img src=".//img/kniterate-3/original-bindoff.jpg" alt="main" />
     <span class="mainnote">the bindoff test sample knit using the original code -- note how the shima-style holds leave some loose stitches on the edge</span>
 </figure>
 
@@ -135,10 +135,10 @@ k.rack(0.0);
 
 <figure style="max-width: 550px;">
     <div class="subfig">
-        <img src="/~material/img/kniterate-3/kniterate-bindoff.png" />
+        <img src=".//img/kniterate-3/kniterate-bindoff.png" />
     </div>
     <div class="subfig">
-        <img src="/~material/img/kniterate-3/knitout-bindoff-2.png" />
+        <img src=".//img/kniterate-3/knitout-bindoff-2.png" />
     </div><br />
     <span class="mainnote">The kniterate editor bindoff, compared to the equivalent in knitout. Note that compared to the image above, no tucked stitches are held at the back.</span>
 </figure>
@@ -176,7 +176,7 @@ if not asDecMethod and (xferNeedle+count) - x &gt;= 30:
 <p>In trying to understand this, I also made an annotated guide to a .kcode ‘row’:</p>
 
 <figure>
-    <img src="/~material/img/kniterate-3/kcode-closeup-2.png" alt="main" />
+    <img src=".//img/kniterate-3/kcode-closeup-2.png" alt="main" />
     <span class="mainnote">the 'row' consists of information about the front bed (carrier position and stitches, then stitch tensions), followd by the back bed, followed by a general metadata section (stitch type, carrier, speed etc)</span>
 </figure>
 
@@ -212,7 +212,7 @@ the adapted visualiser, featuring <i>functional</i> KCode export button and <i>b
 <p>There was a big variety of work, including some really cool samples inspired by images of the sky from the student Chua Yi Jie. The sample was a Double Bed Jacquard, where one yarn was spandex, causing a really interesting bunching form on the right side of the fabric.</p>
 
 <figure>
-    <img src="/~material/img/kniterate-3/chua-yi-jie-jolene.png" alt="main" />
+    <img src=".//img/kniterate-3/chua-yi-jie-jolene.png" alt="main" />
     <span class="mainnote">Chua Yi Jie's sample, with the elastic yarn in light blue</span>
 </figure>
 
