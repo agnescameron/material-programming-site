@@ -15,6 +15,7 @@ collections:
   projects:
     output: true
     order:
+      - auttoman.md
       - software.md
       - talks.md
       - workshops.md

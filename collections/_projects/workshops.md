@@ -2,6 +2,7 @@
 layout: project
 title: material programming workshops
 url: workshops
+type: community
 status: published
 description: Series of student-facing workshops on developing software for the Kniterate machine
 image: /img/crowd.jpeg

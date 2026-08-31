@@ -2,6 +2,7 @@
 layout: project
 title: knitout editor for kniterate
 url: software
+type: software
 status: published
 image: /img/visualiser.png
 description: Developing new programming tools for knit based on the knitout interchange format.

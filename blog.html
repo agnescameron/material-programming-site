@@ -4,6 +4,8 @@ title: blog
 image: /img/cast-on-1-by-1-rib.jpg
 ---
 
+
+<div id="index-flex">
 {% assign posts = site.posts | sort: date | reverse %}
 {% for post in posts %}
 	{% if post.status == 'published' %}
@@ -14,3 +16,4 @@ image: /img/cast-on-1-by-1-rib.jpg
 		</div>
 	{% endif %}
 {% endfor %}
+</div>

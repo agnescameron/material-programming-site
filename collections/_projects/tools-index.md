@@ -2,6 +2,7 @@
 layout: project
 title: open knit tools index
 url: workshops
+type: software
 status: published
 description: Collaborative index and landscape analysis of open knitting design software.
 image: /img/knit-tools-map.jpeg

@@ -4,17 +4,31 @@ title: projects
 image: /img/cast-on-1-by-1-rib.jpg
 ---
 
-<!-- <p>
-We are working on a number of parallel projects to develop research and practice.
-</p> -->
+{% assign projects = site.projects %}
 
-{% assign projects = site.projects | sort: date | reverse %}
-{% for project in projects %}
-	{% if project.status == 'published' %}
-		<div class="proj-item">
-		<a href="{{ project.url | prepend: site.baseurl }}">{{ project.title }} → </a><br>
-			<p>{{ project.description }} </p>
-			<img class="thumb" src="{{ project.image | prepend: site.baseurl }}"/>
-		</div>
-	{% endif %}
-{% endfor %}
+
+<div class="index-col">
+	<h2>software</h2>
+	{% for project in projects %}
+		{% if project.status == 'published' and project.type == 'software' %}
+			<div class="proj-item">
+			<a href="{{ project.url | prepend: site.baseurl }}">{{ project.title }} → </a><br>
+				<p>{{ project.description }} </p>
+				<img class="thumb" src="{{ project.image | prepend: site.baseurl }}"/>
+			</div>
+		{% endif %}
+	{% endfor %}
+</div>
+
+<div class="index-col">
+	<h2>community</h2>
+	{% for project in projects %}
+		{% if project.status == 'published' and project.type == 'community' %}
+			<div class="proj-item">
+			<a href="{{ project.url | prepend: site.baseurl }}">{{ project.title }} → </a><br>
+				<p>{{ project.description }} </p>
+				<img class="thumb" src="{{ project.image | prepend: site.baseurl }}"/>
+			</div>
+		{% endif %}
+	{% endfor %}
+</div>

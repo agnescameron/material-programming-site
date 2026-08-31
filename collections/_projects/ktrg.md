@@ -2,6 +2,7 @@
 layout: project
 title: knit tech reading group
 url: ktrg
+type: community
 status: published
 image: /img/ktrg-map-v3.png
 description: Monthly reading group to discuss contemporary research in knitting technology
