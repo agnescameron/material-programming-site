@@ -1,11 +1,11 @@
 ---
 layout: project
-title: Auttoman
+title: auttoman
 url: software
 status: published
 type: software
 image: /img/gallery/stripes_A.png
-description: Experimental tool for structural knitting.
+description: Experimental tool for structural knitting using industrial machines.
 ---
 
 We are working on a new tool that demonstrates the potential of Knitout-based software to create structural knits. The tool uses a technique called Ottoman, where stitches from lower down in a sample are lifted up the bed and hooked into later rows, creating structures with variable weight, volume, and tensile properties. We are using this tool to prototype a series of structural samples for furniture.

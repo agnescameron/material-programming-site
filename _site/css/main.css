@@ -41,7 +41,7 @@ li {
 }
 
 #index-flex .index-col {
-    max-width: 500px;
+    max-width: 450px;
     margin-right: 0px;
     /*overflow: scroll;*/
 }
@@ -127,7 +127,7 @@ ul {
 }
 
 .project-img {
-	max-width: 500px;
+	max-width: 400px;
 }
 
 .thumb {
