@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>material programming research project</title>
-	<link rel="stylesheet" type="text/css" href=".//css/main.css">
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
 	<script>
 		window.goatcounter = {
 			path: function(p) { return location.host + p }
@@ -17,10 +17,10 @@
 
 <div class="post-container">
 	<p>
-		/\\/o\/\\/o\/\\/o\/\\/\o\/<span class="spacer"></span><a class="header-link" href=".//index.html">home</a><br>
-		//\o/\//\o/\//\o/\//\/o/\/<span class="spacer"></span><a class="header-link" href=".//blog.html">blog</a><br>
-		\/\\o/\/\\o\\/\\o\\/\\/o\\<span class="spacer"></span><a class="header-link" href=".//people.html">people</a><br>
-		\//o\/\//o//\//o//\//\o//\<span class="spacer"></span><a class="header-link" href=".//projects.html">projects</a><br>
+		/\\/o\/\\/o\/\\/o\/\\/\o\/<span class="spacer"></span><a class="header-link" href="/index.html">home</a><br>
+		//\o/\//\o/\//\o/\//\/o/\/<span class="spacer"></span><a class="header-link" href="/blog.html">blog</a><br>
+		\/\\o/\/\\o\\/\\o\\/\\/o\\<span class="spacer"></span><a class="header-link" href="/people.html">people</a><br>
+		\//o\/\//o//\//o//\//\o//\<span class="spacer"></span><a class="header-link" href="/projects.html">projects</a><br>
 	</p>
 
 	<h1>lab notes 3</h1>
@@ -28,7 +28,7 @@
 		<p>B, Rosie and I met this week to work on knitout generation for the Kniterate, and plan the first programming-based session for the <a href="https://cci.arts.ac.uk/~material/">material programming</a> workshop series. We started by trying to articulate exactly what it is we’re trying to achieve (both with the workshops, and with the project more generally) in concrete, technical terms:</p>
 
 <p><span class="marginnote">
-    <img src=".//img/kniterate-code/mods-milling.png" />
+    <img src="/img/kniterate-code/mods-milling.png" />
     A 2.5D milling workflow for the Roland MDX20 in <a href="https://modsproject.org/">mods</a>. The same workflow could easily be adapted for another mill, a laser cutter, vinyl cutter or embroidery machine.
 </span></p>
 <ul>
@@ -43,7 +43,7 @@
 <h2 id="open-knitting-file-formats">open knitting file formats</h2>
 
 <p><span class="marginnote">
-    <img src=".//img/kniterate-code/knitout-kc-comparison.png" />
+    <img src="/img/kniterate-code/knitout-kc-comparison.png" />
     The same file in knitout (left) and kcode (right) format
 </span></p>
 
@@ -84,7 +84,7 @@
 </table>
 
 <p><span class="marginnote">
-    <img src=".//img/kniterate-code/txt-file-pattern.png" />
+    <img src="/img/kniterate-code/txt-file-pattern.png" />
     the ‘load txt file pattern’ layer interface in the Kniterate editor loading a compatible file
 </span></p>
 
@@ -95,7 +95,7 @@
 <p>These .txt files have <em>yet another</em> really specific file format: in this instance, an <a href="https://support.kniterate.com/hc/en-us/articles/11696134190365-CREATE-AND-EXPORT-A-FILE-FROM-DESIGNAKNIT9-TO-KNITERATE">almost pictoral format</a> that includes the shaped file made up of individual stitches, once containing carrier information, and a second time containing stitch types, plus a set of metadata at the top. As far as I can make out, this <em>doesn’t</em> include information about racking, transfers etc: presumably you add that in once you’re in the Kniterate editor. So, while it would probably be possible to write a knitout-to-dak-txt conversion script, in the end we’d lose a lot of information that knitout already does a good job of encoding.</p>
 
 <figure style="width:400px">
-    <img src=".//img/kniterate-code/dak-pattern.png" alt="main" />
+    <img src="/img/kniterate-code/dak-pattern.png" alt="main" />
     <span class="mainnote">an excerpt of the DAK txt export pattern, showing header metadata and then shaped carrier information</span>
 </figure>
 
@@ -104,7 +104,7 @@
 <h3 id="extras">extras</h3>
 
 <p><span class="marginnote">
-    <img src=".//img/kniterate-code/shima-knitout.png" alt="main" />
+    <img src="/img/kniterate-code/shima-knitout.png" alt="main" />
     an example knit file rendered in the knitout visualiser (left) and Shima Seiki visualiser (right)
 </span></p>
 
@@ -123,7 +123,7 @@
 <h2 id="tool-development">tool development</h2>
 
 <p><span class="marginnote">
-    <img src=".//img/kniterate-code/knitout-visualiser.png" />
+    <img src="/img/kniterate-code/knitout-visualiser.png" />
     JS code generating knitout visualised in the Knitout Visualiser
 </span></p>
 
@@ -138,14 +138,14 @@
 <p>The first part of this was also understanding the waste section itself. To explain a bit more about <em>why</em> waste sections are structured the way they are, B shared with us a set of <a href="/img/kniterate-code/dubied-draw-thread.pdf">instructions</a> for casting on the <a href="https://knitworkslondon.com/blogs/blog/an-introduction-to-dubied-industrial-knitting-machines">dubied</a> machines, which are manually-operated industrial machines and the precursor to modern industrial machines like the Stoll and Kniterate. It was interesting to read these, both to think about the idea of non-electrified industrial machinery (still used today!) and also to get a sense of the added complexity required to produce replicable results on large, fine-gauge industrial machines.</p>
 
 <figure>
-    <img src=".//img/kniterate-code/dubied-instructions.png" alt="main" />
+    <img src="/img/kniterate-code/dubied-instructions.png" alt="main" />
     <span class="mainnote">cast-on instructions for the Dubied machine</span>
 </figure>
 
 <p>Increasingly, I think about the ‘industrial-ness’ of these machines as compensating for the added difficulty of managing yarn tension, dropped stitches etc when you can’t use your hands. Hearing B talk about the difference even between a Kniterate, where you can go in and move the needles and carriers around, and a Shima Seiki, which is essentially just a closed cabinet that spits out knitted fabric, also illiustrates this.</p>
 
 <p><span class="marginnote">
-    <img src=".//img/kniterate-code/waste-yarn.png" />
+    <img src="/img/kniterate-code/waste-yarn.png" />
     The waste section of a sample made in the kniterate editor, showing the looser, thicker section of alternating front and back bed stitches of waste yarn (orange) at the bottom, followed by rows of cast-on yarn (plated green/black) and draw thread (pink). Note that this sample failed, and a second waste section is initialised after the red-brown yarn toward the top of the image.
 </span></p>
 
@@ -157,11 +157,11 @@
 
 <figure>
     <div class="subfig">
-        <img src=".//img/kniterate-code/carriers-1.png" />
+        <img src="/img/kniterate-code/carriers-1.png" />
         <span class="mainnote">floats visible in the red draw-thread yarn as it's brought in</span>
     </div>
     <div class="subfig">
-        <img src=".//img/kniterate-code/carriers-2.png" />
+        <img src="/img/kniterate-code/carriers-2.png" />
         <span class="mainnote">changing the carriage direction for those rows brings in the yarn correctly</span>
     </div>
 </figure>
@@ -172,7 +172,7 @@
 
 <p><span class="marginnote">
      <video width="240" controls="">
-      <source src=".//img/kniterate-code/carriers.mp4" type="video/mp4" />
+      <source src="/img/kniterate-code/carriers.mp4" type="video/mp4" />
     </video><br />
     in this video, you can see the carriage moving towards a carrier threaded with plated yarn, and then bring it across the bed, knitting a row. It’s also possible to see the stitches passed between the front and the back beds.
 </span></p>
@@ -212,7 +212,7 @@ for (let p = 0; p &lt; wastePasses; ++p) {
 </code></pre></div></div>
 
 <figure>
-    <img src=".//img/kniterate-code/correspondence.png" alt="main" />
+    <img src="/img/kniterate-code/correspondence.png" alt="main" />
     <span class="mainnote">The end result file, plus details of where we think it corresponds to the visualisation in the knitout editor. Without being able to go from .kc -&gt; .k or from .kc -&gt; Kniterate Editor, we won't know how correct this is until we try it on the machine!</span>
 </figure>
 

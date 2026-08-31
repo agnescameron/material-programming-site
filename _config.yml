@@ -3,10 +3,10 @@ name: material programming project
 sass:
   sass_dir: _sass
 
-root: /
+# root: /
 collections_dir: collections
 
-baseurl: "/" # the subpath of your site, e.g. /blog
+# baseurl: "/" # the subpath of your site, e.g. /blog
 url: ""
 
 future: true
