@@ -50,7 +50,7 @@ li {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    gap: 10px;
+    gap: 6px;
     max-width: 600px;
     align-items: flex-start;
     bottom: 100px;
@@ -61,6 +61,12 @@ li {
     max-height: 100px;
     width: auto;
     height: auto;
+    border: 1px solid white;
+    padding: 2px;
+}
+
+#gallery .small-img:hover {
+    border: 1px solid black;
 }
 
 #gallery .large-img {
@@ -70,6 +76,8 @@ li {
     width: auto;
     height: auto;
     flex-grow: 1;
+    padding: 4px;
+    border: 1px solid black;
 }
 
 .container {
