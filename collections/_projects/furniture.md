@@ -1,7 +1,7 @@
 ---
 layout: project
 title: structural knitting
-url: software
+url: structure
 status: published
 type: hardware
 image: /img/gallery/furniture.jpg

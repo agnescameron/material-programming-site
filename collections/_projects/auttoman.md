@@ -1,7 +1,7 @@
 ---
 layout: project
 title: auttoman
-url: software
+url: auttoman
 status: published
 type: software
 image: /img/gallery/stripes_A.png
