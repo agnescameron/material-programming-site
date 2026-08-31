@@ -3,7 +3,7 @@ layout: home
 title: material programming project
 ---
 
-This is the homepage for the **Material Programming Project**. We are developing knitting as a programmable material, through open-source software that provides a shared infrastructure for industrial knitting.
+This is the homepage for the **Material Programming Project**. We are developing knit as a programmable material, through software that provides a shared infrastructure for industrial knitting.
 
 We are working with and on new open-source programming tools for the development of knitted textiles. We're interested in working with domestic and semi-industrial machines, **[malleable](https://www.inkandswitch.com/malleable-software/)** textile design software, and researchers and practicioners across industry and academia.
 
