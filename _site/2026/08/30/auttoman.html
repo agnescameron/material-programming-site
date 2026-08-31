@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>material programming research project</title>
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
+	<script>
+		window.goatcounter = {
+			path: function(p) { return location.host + p }
+		}
+	</script>
+	<script data-goatcounter="https://agnescam.goatcounter.com/count"
+	 async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+<div class="post-container">
+	<p>
+		/\\/o\/\\/o\/\\/o\/\\/\o\/<span class="spacer"></span><a class="header-link" href="/index.html">home</a><br>
+		//\o/\//\o/\//\o/\//\/o/\/<span class="spacer"></span><a class="header-link" href="/blog.html">blog</a><br>
+		\/\\o/\/\\o\\/\\o\\/\\/o\\<span class="spacer"></span><a class="header-link" href="/people.html">people</a><br>
+		\//o\/\//o//\//o//\//\o//\<span class="spacer"></span><a class="header-link" href="/projects.html">projects</a><br>
+	</p>
+
+	<h1>lab notes 9</h1>
+	<div class="text-content">
+		<figure>
+     <video width="700" controls="" muted="">
+      <source src="/img/kniterate-9/stripes_pull.MOV" />
+    </video><br />
+programmable material structure using Auttoman!
+</figure>
+
+<p><span class="marginnote">
+	<img src="/img/kniterate-9/mohair-twin-2.png" />
+	Annoyingly bad photo of B’s ottoman sample made with the Kniterate software (back, dark blue + yellow) and the equivalent sample made using Auttoman (front, bright blue + bright green). See how the fabric bulges in the middle where the elastic isn’t knit on the front bed.
+</span></p>
+
+<p>B and I have been back at Chelsea this past week playing around with the Kniterate. There’s a sample that B has on the wall that I’ve always loved, which is made with a dense yellow elastic on one side, and a ridged, deep-blue mohair on the back. It has this amazing structure, and behaves in a really interesting way when you stretch it – the parallel columns of elastic give a really strong resistance, and it bulges in the center where they’re not present.</p>
+
+<p>This style is called <a href="https://en.wikipedia.org/wiki/Ottoman_(textile)">Ottoman</a>, and is part of a family of techniques called ‘lifted stitch methods’, where stitches from lower down in a sample are lifted up the bed and hooked into later rows. The core technique is achieved quite simply: for every six rows of the mohair yarn knitted on the back bed, a row of elastic yarn is knit on the front and back beds, with the stitches held on the front needles in between rows. <sidenote>(this can also be done with non-elastic yarns, though the back bed yarn needs to be finer weight).</sidenote> This creates a kind of pleated texture horizontally in the fabric that’s densely elasticated in the vertical direction. By varying the placement of the front bed stitches, the density of the fabric can be changed significantly, and it can create some really compelling structures.</p>
+
+<p>The first structure we made was the simplest possible – just using all the front bed needles, with no transfers between rows. Even this produced a really exciting material – there’s something really modern-feeling about it, and it was really satisfying to see how well it came out on the machine.</p>
+
+<figure>
+	<div class="subfig">
+		<img src="/img/kniterate-9/simple_side_A.png" alt="april" />
+	</div>
+	<div class="subfig">
+		<img src="/img/kniterate-9/simple_side_B.png" alt="august" />
+	</div>
+	<span class="mainnote">The first test of a basic ottoman made using Knitout. I really like the way that the colour on the front side changes subtly as the sample is stretched.</span>
+</figure>
+
+<h2 id="programming-auttoman">Programming Auttoman</h2>
+
+<p><span class="marginnote">
+	<img src="/img/kniterate-9/staged_samples.JPG" />
+	A set of three ottoman samples (top, bottom right), and one plating sample (bottom left)
+</span></p>
+
+<p>Building on the code from the Plating-Patternwitch demo we made for the Ink+Switch conference, I started prototyping a small tool that would allow someone to sketch an Ottoman pattern in Patternwitch, and have the code generated automatically. The main thing the code needs to do is recognise when to transfer a stitch that’s been on the front bed onto the back, which involves scanning the next row and finding which stitches need to be passed over.</p>
+
+<figure>
+	<img src="/img/kniterate-9/stripes_code.png" alt="main" />
+	<span class="mainnote">prototyping the Auttoman code -- the section that handles the transfers outlined in red</span>
+</figure>
+
+<p><span class="marginnote">
+	<img src="/img/kniterate-9/slug_2.png" />
+	The first test of the Patternwitch-&gt;Ottoman code, with a wavy, organic structure
+</span></p>
+
+<p>We got this working pretty quickly, which is great – this kind of transfer planning on the Kniterate software is very laborious and manual, so getting this to work automatically feels like a really great example of how specialised software can really lend itself to fast prototyping of specific techniques.</p>
+
+<p>Once I’d made a local version that I was happy with, I wanted to make the tool work end-to-end in Patchwork. After a slightly chaotic attempt to use the experimental tiling window manager for Patchwork (which was great but also broke a bunch of stuff), I decided to test this for now using parallel browser tabs.</p>
+
+<p>Using a trick that I got from Chee, I made Auttoman into a separate script that can be called in the main one. This makes for much more succinct code, and starts to modularise variables that might later be varied using the interface, like changing the number of back bed rows per row on the front bed, or alternating different colours for the stripes. In some ways there’s nothing revolutionary about this – it’s just modular javascript – but something about the file-agnostic way of passing information back and forth between Automerge files is still really exciting to me.</p>
+
+<figure>
+     <video width="700" controls="" muted="">
+      <source src="/img/kniterate-9/auttoman_redacted.mp4" />
+    </video><br />
+Live(ish) pattern generation with the Auttoman prototype in Patchwork
+</figure>
+
+<h2 id="ottoman-samples">Ottoman Samples</h2>
+
+<p>With the tool working, we spent some time rapidly making a set of different samples based on changing different variables in the ottoman. I was really excited by how expressive this technique was, even with quite simple variations.</p>
+
+<figure>
+	<div class="subfigthird">
+		<img src="/img/kniterate-9/slug_back.png" alt="april" />
+	</div>
+	<div class="subfigthird">
+		<img src="/img/kniterate-9/slug_1.png" alt="august" />
+	</div>
+	<div class="subfigthird">
+		<img src="/img/kniterate-9/slug_fold.png" alt="august" />
+	</div>
+	<span class="mainnote">The same sample from the front, back, and folded down the main axis. The denser central section creates a natural curve when folded.</span>
+</figure>
+
+<p>My favourite so far is one made using overlapping squares, which creates a really beautiful puckered texture. Varying the carrier for the back bed really acccentuates the effects of the different distributions of front and back bed stitches: I really like the way that the orange back rows (where the elastic is stitched on all front bed needles) start to crinkle more as the sample is stretched, while the green rows open up to reveal the elastic.</p>
+
+<figure>
+	<div class="subfigthird">
+		<img src="/img/kniterate-9/stripes_A.png" alt="april" />
+	</div>
+	<div class="subfigthird">
+		<img src="/img/kniterate-9/stripes_B.png" alt="august" />
+	</div>
+	<div class="subfigthird">
+		<img src="/img/kniterate-9/stripes_stretch.png" alt="august" />
+	</div>
+	<span class="mainnote">The same sample from the front, back, and when stretched from the back. When it's stretched, you can see the rows of elastic on the back bed, which are otherwise concealed by the folds.</span>
+</figure>
+
+<p>One thing that did keep happening with the samples was that they would often trigger the sensor on the rollers as they moved through the machine, particularly when there were larger areas of knit on the edge where the front bed wasn’t knit. The solution to this was to add weights during the knitting process, which pulled the fabric down – it might be worth experimenting with how to load them initially so this is less likely to happen.</p>
+
+<p><span class="marginnote">
+	<img src="/img/kniterate-9/elemental_patterns.png" />
+	figure from Carrie’s thesis, demonstrating different loading behaviour of ‘elemental patterns’
+</span></p>
+
+<h2 id="next-steps">Next steps</h2>
+
+<h3 id="structural-questions">Structural Questions</h3>
+
+<p>One of the really cool things about ottoman is how much variation it’s possible to get in the tensile behaviour of the fabric. I’ve been reading <a href="https://www.carriemcknelly.com/about">Carrie McKnelly’s</a> thesis <a href="https://attachments.are.na/29568117/6ecd59741cbf126243c4302c9669345e.pdf?1721742551"><em>Knitting Behaviour</em></a>, on the characterisation of knit textiles in an architectural context. She experiments with different lace patterns to vary the behaviour of samples under load, with the aim of making tensile architectural forms.
+<span class="marginnote">
+	<img src="/img/kniterate-9/fan_ottoman.JPG" />
+	Sample by Suzanne Oude Hengel and Drew McKevitt, which combines partial knit and ottoman techniques to create a fan structure
+</span></p>
+
+<p>Carrie used an Instron machine to properly characterise the behaviour of her samples, which I’d really like to find a way to access: especially for making furniture, being able to understand the loading behaviour of samples feels like an obvious next step.</p>
+
+<h3 id="investigating-partial-knits">Investigating Partial Knits</h3>
+
+<p>One of the designers B showed me when she was explaining the ottoman technique was <a href="https://www.suzanneoudehengel.com/">Suzanne Oude Hengel</a>, who designs knitted footwear, which is a great place to see interesting morphological-structural knits. In particular, <a href="https://www.drewmckevitt.com/performance-fabric-research-with-suzanne-oude-hengel">this project</a> on experimental structural knit with Drew McKevitt made some really inspiring and beautiful forms using the technique.</p>
+
+<p><span class="marginnote">
+	<img src="/img/kniterate-9/ottoman-inlay.png" />
+	a sample of B’s manual knitting, showing an inlay combined with Ottoan
+</span></p>
+
+<p>One thing I noticed is that her samples often complement the structure of the ottoman with fanned structures, where the number of rows that are knit increases in select portions of the knit. This is done using a technique called partial knitting, or short-rowing, which is also used to do things like shaping the heels of socks. This <a href="https://support.kniterate.com/hc/en-us/articles/360010783278-Machine-limitations">isn’t fully possible</a> on the kniterate, though there is some possibility, and it’s apparently more feasible on the edges of the sample (which could be enough for us to create these fanned structures).</p>
+
+<p>Another technique B mentioned, which is <em>sort of</em> possible but a bit tricky is inlay, where additional, thicker yarns are laid between the front and back beds, sitting within the ripples. This is something she uses really beautifully in her manual processes, and can produce really amazing, complex fabrics.</p>
+
+<h3 id="better-cast-off">Better Cast-off</h3>
+
+<p><span class="marginnote">
+	<img src="/img/kniterate-9/bind_off_kniterate.png" />
+	casting off in the Kniterate editor, showing the rear-to-front ‘rack left’ stitch (the down-left-pointing arrow with a ‘1’ above).
+</span></p>
+
+<p>Another outstanding task is to make a better cast-off – we’ve been using an adapted version of the cast-off process in the Knitout code, and it doesn’t always work very well, sometimes breaking the yarn and dropping stitches, probably because it’s still Shima-flavoured. This is mostly just laziness on our part – casting off is really tedious and takes the longest, so testing it to get it looking really nice is a bit of a pain. A clue is that the kniterate editor version only racks once, and by a full needle, where the original knitout version uses a half-rack as well, which might be a good place to start. I’m not sure how the ‘rack left’ stitch in the Kniterate editor translates into knitout operations, so the next step is to compare the .kc files these different processes generate.</p>
+
+<p>The other thing I want to do is investigate split stitches – these are possible both in the Kniterate editor and in Knitout code, but I’m not so sure what they do – I think pushing a stitch that was on one bed onto both.</p>
+
+
+	</div>
+
+</div>
+
+</body>
+</html>
