@@ -11,6 +11,7 @@
 body {
 	font-family: Bespoke-Straight;
 	line-height: 1.2;
+    margin-left: 10px;
 }
 
 h1, h2 {
@@ -25,13 +26,26 @@ li {
 	margin: 10px;
 }
 
+#index-flex {
+    max-width: 90vw;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: flex-start;
+    bottom: 100px;
+}
+
+#index-flex div {
+    margin-right: 100px;
+    margin-bottom: 20px;
+}
+
 #gallery {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     gap: 10px;
-    max-width: 900px;
-    /*position: absolute;*/
+    max-width: 600px;
     align-items: flex-start;
     bottom: 100px;
 }
@@ -44,7 +58,7 @@ li {
 }
 
 #gallery .large-img {
-    max-width: 100%;
+    max-width: 600px;
     max-height: 600px;
     z-index: 2;
     width: auto;
@@ -56,6 +70,11 @@ li {
 	max-width: 600px;
 	margin: 15px;
 	margin-bottom: 50px;
+}
+
+.home-container {
+    margin: 15px;
+    margin-bottom: 50px;
 }
 
 .post-container {

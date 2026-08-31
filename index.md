@@ -1,5 +1,5 @@
 ---
-layout: main
+layout: home
 title: material programming research project
 ---
 
