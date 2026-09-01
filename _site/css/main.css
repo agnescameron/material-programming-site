@@ -35,6 +35,10 @@ li {
     bottom: 100px;
 }
 
+#home-text {
+    margin-right: 100px;
+}
+
 #index-flex div {
     margin-bottom: 20px;
 }

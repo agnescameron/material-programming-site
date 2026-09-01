@@ -4,7 +4,7 @@ title: auttoman
 url: auttoman
 status: published
 type: software
-image: /img/gallery/stripes_A.png
+image: /img/gallery/honeycomb.jpg
 description: Experimental tool for structural knitting using industrial machines.
 ---
 
