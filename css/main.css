@@ -469,4 +469,8 @@ label.margin-toggle:not(.sidenote-number) {
     video {
         max-width: 85vw;
     }
+
+    #home-text {
+    margin-right: 10px;
+}
 }
