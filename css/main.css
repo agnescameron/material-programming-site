@@ -391,6 +391,17 @@ h3 > code {
     font-size: 0.80em; 
 }
 
+.workshop-link {
+    width: 300px;
+    position: absolute;
+    z-index: 3;
+}
+
+.workshop-link:hover {
+  rotate: -5deg;
+}
+
+
 .marginnote > code,
 .sidenote > code {
     font-size: 1rem; 

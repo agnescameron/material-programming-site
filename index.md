@@ -10,3 +10,7 @@ We are working with and on new open-source programming tools for the development
 In **Autumn 2026**, we will be developing a new research tool, **[Auttoman](/projects/auttoman.html)**, to investigate **[structural knits](/projects/furniture.html)** for interior design. We will be continuing to run **[student-facing workshops](/projects/workshops.html)**, and convene the **[Knit Tech Reading Group](/projects/ktrg.html)**.
 
 If any of the above sounds interesting to you, please <a href="mailto:a.cameron@arts.ac.uk">get in touch</a>.
+
+<div class="workshop-link">
+	<a href="workshops/2026-10-30-workshop-1.html"><img src="img/workshop-1/workshop-1.png" /></a>
+</div>
