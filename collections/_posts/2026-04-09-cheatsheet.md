@@ -3,14 +3,10 @@ layout: post
 title:  "knitout-js cheatsheet"
 author: agnes cameron
 date:  2026-04-09
-description: a guide to using the adapted visualiser
+description: an overview of knitoutjs commands
 status: published
 image: "/img/knitout-cheatsheet/kniterate-diagram.jpg"
 ---
-
-For the [material programming](https://cci.arts.ac.uk/~material/) workshops, we have made an [adapted version](https://agnescameron.github.io/knitout-visualizer-kniterate/) of CMU's [original](https://textiles-lab.github.io/knitout-live-visualizer/) Knitout visualiser, that allows you to write javascript code and export directly to files that run on the Kniterate machine. The visualiser uses a Javascript library called knitout, which allows you to write code that can be translated to run on a knitting machine.
-
-<!-- This page starts with a cheatsheet (just below), and further down is a walkthrough of loading the interface and writing a file. Below that is a set of examples. -->
 
 ## knitout-js commands
 
@@ -23,6 +19,7 @@ This table is adapted from the longer guide in the [knitout-frontend-js](https:/
 [xfer](https://knit.work/transfer/) | `from bed+needle`, `to bed+needle` | `xfer("f10","b10")` | Transfer loops from **from bed** at **needle** to  **to bed** at **needle**
 [rack](https://knit.work/rack/) | `rack value`(Number) | `rack(1)` | Translate the back bed relative to the front bed by **rack value** needle units. The default racking is zero -- Kniterate machines also support racking by 0.5 (needed to knit with both beds)
 [drop](https://knit.work/drop/)| `bed+needle` | `drop("f10")` | Drop loops from **bed+needle** (if you can't be bothered to cast off)
+[split](https://knit.work/split/)| `direction`, `from bed+needle`, `to bed+needle`, `carrier`  | `split("+", "f1", "b1", "3")` | split the loop on **from bed** at **needle** to also be at **to bed** at **needle**
 in  | `carrier` | `in("5")` | Bring in yarn carrier **carrier**
 out | `carrier` | `out("6")` | Take out yarn carrier **carrier** (not strictly necessary on kniterate and can cause issues -- only do this right at the end)
 
@@ -40,9 +37,17 @@ Here's how the beds, needle numbers and carriage directions correspond to the kn
 * don't put more than two tuck stitches on top of each other (machine will get stressed out -- this is a general machine thing)
 * don't start at needle zero! try and center your design on the bed try 50 to start with
 
+Kniterate also has a number of extension commands
+
+| command      | arguments      | example      | description      |
+| ------------- | ------------- | ------------- | ------------- |
+| roller advance | `0-500` | `rollerAdvance(x)` | change the roller advance value to **x**
+| speed number | `0-500` | `speedNumber(x)` | change the speed value to **x**
+| stitch number | `1-10` | `stitchNumber(x)` | change the stitch number to **x**
+
 ### filetype guide
 
-Using the visualiser allows you to *write* Javascript, which is transformed into KCode that runs on the knitting machine. It does this by first translating the Javascript into another language called Knitout, in which each line is a single instruction to the machine. Javascript is easier to read than Knitout, which is easier again to read than KCode.
+Using the Patchwork knitout editor allows you to *write* Javascript, which is transformed into KCode that runs on the knitting machine. It does this by first translating the Javascript into another language called Knitout, in which each line is a single instruction to the machine. Javascript is easier to read than Knitout, which is easier again to read than KCode.
 
 | file type      | ending      | usage      | 
 | ------------- | ------------- | ------------- |
@@ -50,7 +55,7 @@ Using the visualiser allows you to *write* Javascript, which is transformed into
 | javascript | .js | code that's written or loaded into the editor that creates knitting files, based on the *knitout* library. |
 | [knitout](/img/kniterate-code/waste-test.k) | .k | this is the file that translates between the javascript code and the kcode that runs on the kniterate |
 
-
+<!-- viscolour -->
 <!-- ## using the interface
 
 The knitout visualiser has 2 sides -- one to write code (either in Javascript, or directly in knitout), the other to see the results. It will load with an example -- you can either edit this, delete everything and start from scratch, or load a file into the interface from your computer.

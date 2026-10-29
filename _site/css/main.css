@@ -367,14 +367,16 @@ table.fullwidth {
 
 code {
     font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-    font-size: 1rem;
+    font-size: 0.8rem;
     line-height: 1.2;
     -webkit-text-size-adjust: 100%; /* Prevent adjustments of font size after orientation changes in iOS. See https://github.com/edwardtufte/tufte-css/issues/81#issuecomment-261953409 */
+    background-color: #eee;
+    padding: 2px;
 }
 
 pre > code {
     font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-    font-size: 1rem !important;
+    font-size: 0.8rem !important;
     line-height: 1.2;
     -webkit-text-size-adjust: 100%; /* Prevent adjustments of font size after orientation changes in iOS. See https://github.com/edwardtufte/tufte-css/issues/81#issuecomment-261953409 */
 }
@@ -391,12 +393,12 @@ h3 > code {
 
 .marginnote > code,
 .sidenote > code {
-    font-size: 1.2rem; 
+    font-size: 1rem; 
 }
 
 pre > code {
-    font-size: 1.2rem;
-    width: 52%;
+    font-size: 1rem;
+    /*width: 85%;*/
     margin-left: 2.5%;
     display: block;
     white-space: pre-wrap;       /* Since CSS 2.1 */

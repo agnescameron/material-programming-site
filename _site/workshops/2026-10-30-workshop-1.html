@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>material programming research project</title>
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
+	<script>
+		window.goatcounter = {
+			path: function(p) { return location.host + p }
+		}
+	</script>
+	<script data-goatcounter="https://agnescam.goatcounter.com/count"
+	 async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+<div class="post-container">
+	<p>
+		/\\/o\/\\/o\/\\/o\/\\/\o\/<span class="spacer"></span><a class="header-link" href="/index.html">home</a><br>
+		//\o/\//\o/\//\o/\//\/o/\/<span class="spacer"></span><a class="header-link" href="/blog.html">blog</a><br>
+		\/\\o/\/\\o\\/\\o\\/\\/o\\<span class="spacer"></span><a class="header-link" href="/people.html">people</a><br>
+		\//o\/\//o//\//o//\//\o//\<span class="spacer"></span><a class="header-link" href="/projects.html">projects</a><br>
+	</p>
+
+	<h1>knitout and knitoutjs basics</h1>
+	<p><b>author: agnes cameron</b></p>
+	<div class="text-content">
+		<h2 id="intro">intro</h2>
+
+<p>In this workshop, we will be writing code that we can turn into knitted textiles using a Kniterate machine. Like many learning processes, we will need to start small, but where we learn something that can lead on to something bigger we’ll try and include some examples.</p>
+
+<p>We will first be learning  about a language called <a href="https://textiles-lab.github.io/knitout/knitout.html">“Knitout”</a>. This is the foundation and basis of everything we are doing, and it’s important to be able to understand and read it (though for reasons that will become clear, after today we are almost never going to write it). Once we are comfortable with what knitout means and does, we will learn about a second language, called <a href="https://github.com/textiles-lab/knitout-frontend-js">“KnitoutJS”</a> (the “JS” stands for “Javascript”) that makes writing it much easier.</p>
+
+<h3 id="kniterate-machine">Kniterate Machine</h3>
+
+<p>As a reference, here’s how the beds, needle numbers and carriage directions correspond to the Kniterate machine. Note that needles with the same ‘number’ will be opposite one another, and the positive and negative directions are the <em>same</em> for both beds. We’ll find out more about this in a minute.</p>
+
+<figure>
+    <img src="/img/knitout-cheatsheet/kniterate-diagram.jpg" alt="main" />
+</figure>
+
+<h2 id="knitout">Knitout</h2>
+
+<p><span class="marginnote">
+    <img src="/img/workshop-1/knitout.png" />
+    this is what knitout looks like
+</span></p>
+
+<p><a href="https://textiles-lab.github.io/knitout/knitout.html">Knitout</a> is a language for representing instructions given to industrial knitting machines. The <em>cool</em> thing about knitout is it doesn’t matter what machine you’re using – there are ways of translating knitout for our machine (the <a href="https://www.kniterate.com/">Kniterate</a>) but also to other industrial machines like <a href="https://www.shimaseiki.com/">Shima Seiki</a>.</p>
+
+<p>We are using a tool called the <a href="https://knit.patchwork.inkandswitch.com/">Patchwork Knitout Editor</a> to visualise the knitout code we are writing. It is based on a tool made by Gabrielle Ohlson and Jim McCann at Carnegie Mellon University, called the <a href="https://textiles-lab.github.io/knitout-live-visualizer/">knitout visualiser</a>. We’re using the Patchwork tool because it will let us do some extra stuff further down the line. If for whatever reason the patchwork version isn’t working for you, the Textiles Lab version will let you do everything you need for today.</p>
+
+<h3 id="example-1-chain">example 1: chain</h3>
+
+<p>If you’re using the Patchwork editor, select ‘knitout example’ in the sidebar. We want to delete everything in the file until all that’s left is the following code:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>;!knitout-2
+;;Carriers: 1 2 3 4 5 6
+
+in 3
+knit + f1 3
+</code></pre></div></div>
+
+<p>The first two lines of this file are what’s called the ‘header’ – they tell our program what version of the knitout language we are using, and what kind of knitting machine this is for (we are using a Kniterate, which has 6 carriers).</p>
+
+<p><span class="marginnote">
+    <img src="/img/workshop-1/screen-1.png" alt="main" />
+    <span class="mainnote">knitout code (left) viewed in the visualiser (right)</span>
+</span></p>
+
+<p>The next line “brings in” carrier number 3. This tells the machine that we want to work with that yarn and brings it up to the needles. The final line here, <code class="language-plaintext highlighter-rouge">knit + f1 3</code>, is more complex. This one translates as:</p>
+
+<blockquote>
+  <p>Knit, in the <em>positive</em> direction, a stitch on <em>needle 1</em> on the <em>front</em> bed, using <em>carrier 3</em></p>
+</blockquote>
+
+<p>Side by side, your page should look like to the right. What we are seeing in the visualiser on the right hand side is the very first stitch, on needle 1.</p>
+
+<p>Right now our first stitch looks like an open loop. We need to add a stitch on the next row to close it. We can do this by adding a second line. As we’ve knitted our first ‘row’ in the positive direction (left to right), to add another row to our first stitch we’ll need to go in the reverse direction, also on needle 1. Our file now becomes:</p>
+
+<p><span class="marginnote">
+    <img src="/img/workshop-1/chain-1.png" />
+    Adding a second row
+</span></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>;!knitout-2
+;;Carriers: 1 2 3 4 5 6
+
+in 3
+knit + f1 3
+knit - f1 3
+</code></pre></div></div>
+
+<p>Now, if we want to make a chain, all we need to do is keep adding stitches.</p>
+
+<p><strong>Exercise 1:</strong> See if you can work out how to add a third and a fourth stitch on the same needle. Now try making the chain 20 stitches long!</p>
+
+<h3 id="example-2-rows">example 2: rows</h3>
+
+<p><span class="marginnote">
+    <img src="/img/workshop-1/row-1.png" />
+    A first row, with five needles
+</span></p>
+
+<p>What if we wanted to have our piece of knitting be more than one stitch wide? For this, we’ll need to start using some more needles. Say we want our sample to be five stitches wide. We’ll start in the same way, but this time we’ll keep going with our row past needle <code class="language-plaintext highlighter-rouge">f1</code>. Note that we keep using the carrier 3!</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>;!knitout-2
+;;Carriers: 1 2 3 4 5 6
+
+in 3
+knit + f1 3
+knit + f2 3
+knit + f3 3
+knit + f4 3
+knit + f5 3
+</code></pre></div></div>
+
+<p>To get our second row, we’ll want to use the same principle as before. Our carriage has gone to the right hand side of the knit. If we simply add a second row in the positive direction, we’ll get the issue you can see on the right. This happens when yarn is brought across the bed (as a ‘float’) to a new location: in this instance, the left hand side of a row, even though the yarn has finished on the right.</p>
+
+<p><span class="marginnote">
+    <img src="/img/workshop-1/row-float.png" />
+        the stitches on the second row are in the wrong direction
+</span></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+knit + f4 3
+knit + f5 3
+
+knit + f1 3
+knit + f2 3
+knit + f3 3
+knit + f4 3
+knit + f5 3
+</code></pre></div></div>
+
+<p>We also don’t want to do the following: this actually is even worse than before! even though our carriage direction is right, we’re now knitting our needles in the wrong order.</p>
+
+<p><span class="marginnote">
+    <img src="/img/workshop-1/row-order.png" />
+    the stitches on the second row are in the right direction but the wrong order
+</span></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+knit + f4 3
+knit + f5 3
+
+knit - f1 3
+knit - f2 3
+knit - f3 3
+knit - f4 3
+knit - f5 3
+</code></pre></div></div>
+
+<p>Instead, we need to knit from right to left, <em>both</em> by telling the carriage to move in that direction, <em>and</em> by knitting the needles in the right order.  That means starting from the higher-number needles!</p>
+
+<p><span class="marginnote">
+    <img src="/img/workshop-1/row-2.png" />
+    the second row working correctly
+</span></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+knit + f4 3
+knit + f5 3
+
+knit - f5 3
+knit - f4 3
+knit - f3 3
+knit - f2 3
+knit - f1 3
+</code></pre></div></div>
+<p><strong>Exercise 2:</strong> Try adding a few more rows! See if you can get them without floats.</p>
+
+<h3 id="example-3-stripes">example 3: stripes</h3>
+
+<p>If you’ve ever knitted with a domestic or even an industrial machine, you’ll know that all you need to do to get a stripe is to change the yarn your carriage is using. We’re going to do the same thing here. Unlike a domestic machine, to change yarns, we are going to select a different carrier – up till now we’ve only been using carrier number 3.</p>
+
+<p>Carriers 1 and 6 are reserved for the waste section (more on that in Workshop 2), so for now we can pick 2, 4, or 5. Let’s go with 4.</p>
+
+<p>If we take our rows example from before, and finish with carrier 3 on the left hand side (this is good practice if you’re going to leave a carrier more than a few rows), then we can continue as follows:</p>
+
+<p><span class="marginnote">
+    <img src="/img/workshop-1/stripe-1.png" />
+    we got a stripe!
+</span></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+knit - f2 3
+knit - f1 3
+
+knit + f1 4
+knit + f2 4
+knit + f3 4
+knit + f4 4
+knit + f5 4
+</code></pre></div></div>
+
+<p><strong>Exercise 3:</strong> See if you can make a few stripes! Try changing between some other colours.</p>
+
+<h3 id="example-4-back-bed">example 4: back bed</h3>
+
+<p><span class="marginnote">
+    <img src="/img/workshop-1/back-1.png" />
+    rows knitted on the back bed
+</span></p>
+
+<p>So far, we’ve only used the needles on the front bed of the Kniterate, denoted by an ‘f’ in the command. What if we try to use the back?</p>
+
+<p>Let’s start off really simple, just with a version of our row file but this time done only on the back bed:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+knit + b1 3
+knit + b2 3
+knit + b3 3
+knit + b4 3
+knit + b5 3
+
+knit - b5 3
+knit - b4 3
+knit - b3 3
+knit - b2 3
+knit - b1 3
+</code></pre></div></div>
+
+<p><span class="marginnote">
+    <img src="/img/workshop-1/back-1.png" />
+    simple knitout rib
+</span></p>
+
+<p><strong>Exercise 4:</strong> See if you can make the rib pattern to the right -&gt;</p>
+
+<h3 id="example-5-transfers">example 5: transfers</h3>
+<p>The last thing we’re going to try in pure knitout (before we explore some ways to make our lives easier) are transfers. Transfers are a way of passing stitches <em>between beds</em> – in practice, a sample rarely starts on the back bed, and normally will use both. The way we “bring in” those needles is by transferring them.</p>
+
+<p>So far we’ve just used the “knit” command in knitout. This has been fine, but we’ve not tried to knit stitches with a front needle on one row, and a back needle on the next. What happens if we try knitting a row on the front, followed by a few rows on the back:</p>
+
+<p><span class="marginnote">
+    <img src="/img/workshop-1/xfer-1.png" />
+    even though we’re now knitting on the back bed, the front bed is still holding the loops from the previous row
+</span></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+knit - f5 3
+knit - f4 3
+knit - f3 3
+knit - f2 3
+knit - f1 3
+
+knit + b1 3
+knit + b2 3
+knit + b3 3
+knit + b4 3
+knit + b5 3
+...
+</code></pre></div></div>
+
+<p>It takes a few rows to see the problem – our front stitches are still held on the needles. After a few more rows, our sample is going to start to be under serious stress!</p>
+
+<p>To get around this, we are going to use transfer command. Consider the following:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xfer f1 b1
+</code></pre></div></div>
+
+<p>This means:</p>
+
+<blockquote>
+  <p>Transfer the stitch on <em>front needle 1</em> to <em>back needle 1</em></p>
+</blockquote>
+
+<p>Note a few things:</p>
+<ol>
+  <li>we didn’t need to specify the direction</li>
+  <li>we didn’t need to specify a carrier</li>
+  <li>the needle numbers match</li>
+</ol>
+
+<p>Points 1. and 2. are for the same reason – transfers don’t involve any additional knitting, as they’re just taking a loop and passing it between needles. They don’t affect the position of the carriers, or use any yarn.</p>
+
+<p>Point 3. is normally, but not always the case. Ordinarily, needle <code class="language-plaintext highlighter-rouge">f1</code> and <code class="language-plaintext highlighter-rouge">b1</code> are facing one another, so the machine can easily transfer the loop from one to the other. If you wanted to transfer from <code class="language-plaintext highlighter-rouge">f1</code> to, say, <code class="language-plaintext highlighter-rouge">f2</code>, you’d need to do something called <em>racking</em>, where you move the front bed. We won’t get into that now, but it’s definitely possible.</p>
+
+<p>This is where we can do nice things like transitions. Perhaps we want to knit a couple of rows on the front bed, then transfer our stitches, and then knit some rows on the back bed. Let’s try that.</p>
+
+<p><span class="marginnote">
+    <img src="/img/workshop-1/xfer-2.png" />
+    transferring from front to back
+</span></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+knit + f1 3
+knit + f2 3
+knit + f3 3
+knit + f4 3
+knit + f5 3
+
+knit - f5 3
+knit - f4 3
+knit - f3 3
+knit - f2 3
+knit - f1 3
+
+xfer f1 b1
+xfer f2 b2
+xfer f3 b3
+xfer f4 b4
+xfer f5 b5
+
+knit + b1 3
+knit + b2 3
+...
+</code></pre></div></div>
+
+<p><strong>Exercise 5:</strong> Building on the rib example from earlier, see if you can recreate the following pattern (shown right). Knit 2 rows on the front bed. <em>Then</em> knit four rows of rib. <em>Then</em>, see if you can knit some rows on the front bed again.</p>
+
+<h2 id="knitout-js">Knitout-JS</h2>
+
+<!-- <span class="marginnote">
+    <img src="/img/workshop-1/knitoutjs.png"/>
+    this is what knitoutJS looks like
+</span> -->
+
+<p><strong>For a reference on using KnitoutJS, we made a cheatsheet of important commands <a href="">here</a>!</strong></p>
+
+<p>This is all very well and good. It will work on the machine! It’s valid knitout code! But it’s not very fun to write, and it’s very hard to make changes. Even if we write out the first two rows and just copy and paste, we’re going to have a bad time.</p>
+
+<p><span class="marginnote">
+    <img src="/img/workshop-1/temp-scarf.png" />
+    live weather temperatures visualised as a scarf! this is something cool you can do with javascript!
+</span></p>
+
+<p>This is where KnitoutJS comes in. KnitoutJS was written by the same people that made Knitout, to make it easier to write! They’ve since made some other tools, but we liked KnitoutJS and wanted to use it more. What it lets us do is write the same commands we were already writing using a programming language called Javascript. The cool thing about Javascript is that it’s a full programming language by itself: this means that we can start using other computer things (data! 3d objects! images!) to make knit.</p>
+
+<p>First of all, though, we need to know the basics.</p>
+
+<h3 id="example-6-rows-revisited">example 6: rows revisited</h3>
+
+<p>Let’s go back to our example with the rows. The first thing we can do is try and simplify our code. In knitout, 2 rows of 5 needles looks like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>knit + f1 3
+knit + f2 3
+knit + f3 3
+knit + f4 3
+knit + f5 3
+
+knit - f5 3
+knit - f4 3
+knit - f3 3
+knit - f2 3
+knit - f1 3
+</code></pre></div></div>
+<p>To get started with rewriting our code in KnitoutJS, we’re going to go back to the sidebar and select the file “knitoutJS example” in the sidebar on the left hand side. This is the editor that we’re now going to use.</p>
+
+<p>The leftmost file is the KnitoutJS file we’ll be editing. The <em>middle</em> file, you might recognise as knitout. We don’t need to look at it, and we can’t edit this one: it’s <em>generated</em> automatically by the KnitoutJS we are writing!</p>
+
+<p>Our very first file in KnitoutJS is going to look like this (paste this into the file to the left of the editor, indicated by the red arrow in the image below):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const knitout = require('knitout');
+let k = new knitout.Writer({carriers:["1", "2", "3", "4", "5", "6"]});
+
+k.knit("+", "f1", "3")
+</code></pre></div></div>
+
+<figure>
+    <img src="/img/workshop-1/knitoutjs-example.png" />
+    <span class="mainnote">looking at knitoutjs in the editor</span>
+</figure>
+
+<p>Just like before, the first two lines are a sort of ‘header’. We also have done something interesting where we make a thing called “k”. “k” is going to hold all of our knitout information – we don’t need to worry about it too much for now though.</p>
+
+<p>When we run this code, this should generate the same knitout file that we made back in example 1. If we want to rewrite our 5-stitch row example in KnitoutJS, we can do this using the following:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>k.knit("+", "f1", "3")
+k.knit("+", "f2", "3")
+k.knit("+", "f3", "3")
+k.knit("+", "f4", "3")
+k.knit("+", "f5", "3")
+
+k.knit("-", "f5", "3")
+k.knit("-", "f4", "3")
+k.knit("-", "f3", "3")
+k.knit("-", "f2", "3")
+k.knit("-", "f1", "3")
+</code></pre></div></div>
+
+<p>So far, not very exciting (we’ve even used more words!). But because we’re in Javascript, instead of using all these lines, we can try using something called a <a href="https://www.w3schools.com/js/js_loop_for.asp"><em>for loop</em></a>. We’re going to use the letter <code class="language-plaintext highlighter-rouge">n</code> to stand in for ‘needle’, but we could use anything we liked!</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+
+for (let n=1; n&lt;=5; n++) {
+    k.knit("+", "f"+n, "3")
+}
+
+for (let n=5; n&gt;=1; n--) {
+    k.knit("-", "f"+n, "3")
+}
+</code></pre></div></div>
+
+<p>Now, this <em>still</em> hasn’t saved us many lines, but the cool thing here is that now we use the same number of lines to knit a sample 5 stitches wide as we do 20.</p>
+
+<p><strong>Exercise 6</strong> try changing the above code to knit a sample that is 20 stitches wide.</p>
+
+<h3 id="example-2-more-loop">example 2: <em>more</em> loop</h3>
+
+<p>This is cool, but we are still adding a new one of these for loops every time we want to knit a row. What if we wanted to knit 10 rows? Well – we could try doing the following:</p>
+
+<p><span class="marginnote">
+    <img src="/img/workshop-1/more-loop-1.png" />
+    <i>how</i> many rows?
+</span></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for(let row=1; row&lt;=10; row++){
+    for (let n=1; n&lt;=20; n++) {
+        k.knit("+", "f"+n, "3")
+    }
+
+    for (let n=20; n&gt;=1; n--) {
+        k.knit("-", "f"+n, "3")
+    }
+}
+</code></pre></div></div>
+<p>Now we’re getting somewhere! 10 rows and 20 stitches makes… 200 rows of Knitout! But we’ve done it in just 5 lines of KnitoutJS, give or take.</p>
+
+<p><strong>Exercise 7</strong> How many rows of knit is the above code <em>actually</em> knitting? Why? Can you rewrite this code so it actually knits 10 rows?</p>
+
+<p>Another way to neaten up our row numbers is to use <em>conditional logic</em>. This lets us test to see if something is the case, then change what we do based on a condition.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+for(let row=1; row&lt;=10; row++){
+  // does the row number divide by 2
+  if(row%2 == 0) { 
+    for (let n=1; n&lt;=20; n++) {
+      k.knit("+", "f"+n, "3")
+    }
+  }
+
+  else{
+    for (let n=20; n&gt;=1; n--) {
+      k.knit("-", "f"+n, "3")
+    }
+  }
+}
+</code></pre></div></div>
+
+<h3 id="example-8-rib">example 8: rib</h3>
+
+<p>We can also use conditional logic <em>inside</em> the for loops that are making the rows, to decide whether stitches should be knit on the front or back bed. Try this out:</p>
+
+<p><span class="marginnote">
+    <img src="/img/workshop-1/rib-1.png" />
+    a rib made using if statements
+</span></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+for(let row=1; row&lt;=10; row++){
+    if(row%2 == 0) { // does the row number divide by 2
+        for (let n=1; n&lt;=20; n++) {
+            if(n%2 == 0) k.knit("+", "f"+n, "3")
+            else k.knit("+", "b"+n, "3")
+        }
+    }
+
+    else{
+        for (let n=20; n&gt;=1; n--) {
+            if(n%2 == 0) k.knit("-", "f"+n, "3")
+            else k.knit("-", "b"+n, "3")
+        }
+    }
+}
+</code></pre></div></div>
+
+<p>The next thing we want to try and do is recreate our transfer code. In KnitoutJS, the code for a transfer is <code class="language-plaintext highlighter-rouge">k.xfer(fn, bn)</code>. If we want to knit a row on the front, followed by a row on the back, we can do the following:</p>
+
+<p><span class="marginnote">
+    <img src="/img/workshop-1/rib-3.png" />
+    using for loops to make transfers from front to back
+</span></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+for (let n=1; n&lt;=20; n++) {
+  k.knit("+", "f"+n, "3")
+}
+
+for (let n=1; n&lt;=20; n++) {
+  k.xfer("f"+n, "b"+n,)
+}
+
+for (let n=20; n&gt;=1; n--) {
+  k.knit("-", "b"+n, "3")
+}
+</code></pre></div></div>
+
+<p><span class="marginnote">
+    <img src="/img/workshop-1/rib-2.png" />
+    challenge!
+</span></p>
+
+<p><strong>Exercise 8</strong> As a challenge, try to recreate the example from earlier, where we have a few rows of front bed knitting, followed by a rib. Can you use conditional logic to do the transfers?</p>
+
+
+	</div>
+
+</div>
+
+</body>
+</html>
