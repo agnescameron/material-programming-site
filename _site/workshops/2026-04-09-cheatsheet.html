@@ -24,7 +24,7 @@
 	</p>
 
 	<h1>knitout-js cheatsheet</h1>
-	<p><b>author: agnes cameron</b></p>
+	<!-- <p>author: agnes cameron</p> -->
 	<div class="text-content">
 		<h2 id="knitout-js-commands">knitout-js commands</h2>
 
@@ -42,37 +42,37 @@
   <tbody>
     <tr>
       <td><a href="https://knit.work/knit/">knit</a></td>
-      <td><code class="language-plaintext highlighter-rouge">direction</code>, <code class="language-plaintext highlighter-rouge">bed+needle</code>, <code class="language-plaintext highlighter-rouge">carrier</code></td>
+      <td>direction, bed+needle, carrier</td>
       <td><code class="language-plaintext highlighter-rouge">knit("+","f10","3")</code></td>
       <td>Knit a stitch, on <strong>bed</strong> at <strong>needle</strong>, in <strong>direction</strong>, using <strong>carrier</strong></td>
     </tr>
     <tr>
       <td><a href="https://knit.work/tuck/">tuck</a></td>
-      <td><code class="language-plaintext highlighter-rouge">direction</code>, <code class="language-plaintext highlighter-rouge">bed+needle</code>, <code class="language-plaintext highlighter-rouge">carrier</code></td>
+      <td>direction, bed+needle, carrier</td>
       <td><code class="language-plaintext highlighter-rouge">tuck("+","f10","3")</code></td>
       <td>Tuck a stitch, on <strong>bed</strong> at <strong>needle</strong>, in <strong>direction</strong>, using <strong>carrier</strong></td>
     </tr>
     <tr>
       <td><a href="https://knit.work/transfer/">xfer</a></td>
-      <td><code class="language-plaintext highlighter-rouge">from bed+needle</code>, <code class="language-plaintext highlighter-rouge">to bed+needle</code></td>
+      <td>from bed+needle, to bed+needle</td>
       <td><code class="language-plaintext highlighter-rouge">xfer("f10","b10")</code></td>
       <td>Transfer loops from <strong>from bed</strong> at <strong>needle</strong> to  <strong>to bed</strong> at <strong>needle</strong></td>
     </tr>
     <tr>
       <td><a href="https://knit.work/rack/">rack</a></td>
-      <td><code class="language-plaintext highlighter-rouge">rack value</code>(Number)</td>
+      <td>rack value (Number)</td>
       <td><code class="language-plaintext highlighter-rouge">rack(1)</code></td>
-      <td>Translate the back bed relative to the front bed by <strong>rack value</strong> needle units. The default racking is zero – Kniterate machines also support racking by 0.5 (needed to knit with both beds)</td>
+      <td>Translate the back bed relative to the front bed by <strong>rack value</strong> needle units. (0 by default)</td>
     </tr>
     <tr>
       <td><a href="https://knit.work/drop/">drop</a></td>
-      <td><code class="language-plaintext highlighter-rouge">bed+needle</code></td>
+      <td>bed+needle</td>
       <td><code class="language-plaintext highlighter-rouge">drop("f10")</code></td>
       <td>Drop loops from <strong>bed+needle</strong> (if you can’t be bothered to cast off)</td>
     </tr>
     <tr>
       <td><a href="https://knit.work/split/">split</a></td>
-      <td><code class="language-plaintext highlighter-rouge">direction</code>, <code class="language-plaintext highlighter-rouge">from bed+needle</code>, <code class="language-plaintext highlighter-rouge">to bed+needle</code>, <code class="language-plaintext highlighter-rouge">carrier</code></td>
+      <td>direction, from bed+needle, to bed+needle, carrier</td>
       <td><code class="language-plaintext highlighter-rouge">split("+", "f1", "b1", "3")</code></td>
       <td>split the loop on <strong>from bed</strong> at <strong>needle</strong> to also be at <strong>to bed</strong> at <strong>needle</strong></td>
     </tr>

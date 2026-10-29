@@ -14,12 +14,12 @@ This table is adapted from the longer guide in the [knitout-frontend-js](https:/
 
 | command      | arguments      | example      | description      |
 | ------------- | ------------- | ------------- | ------------- |
-[knit](https://knit.work/knit/) | `direction`, `bed+needle`, `carrier` | `knit("+","f10","3")` | Knit a stitch, on **bed** at **needle**, in **direction**, using **carrier**
-[tuck](https://knit.work/tuck/) | `direction`, `bed+needle`, `carrier` | `tuck("+","f10","3")` | Tuck a stitch, on **bed** at **needle**, in **direction**, using **carrier**
-[xfer](https://knit.work/transfer/) | `from bed+needle`, `to bed+needle` | `xfer("f10","b10")` | Transfer loops from **from bed** at **needle** to  **to bed** at **needle**
-[rack](https://knit.work/rack/) | `rack value`(Number) | `rack(1)` | Translate the back bed relative to the front bed by **rack value** needle units. The default racking is zero -- Kniterate machines also support racking by 0.5 (needed to knit with both beds)
-[drop](https://knit.work/drop/)| `bed+needle` | `drop("f10")` | Drop loops from **bed+needle** (if you can't be bothered to cast off)
-[split](https://knit.work/split/)| `direction`, `from bed+needle`, `to bed+needle`, `carrier`  | `split("+", "f1", "b1", "3")` | split the loop on **from bed** at **needle** to also be at **to bed** at **needle**
+[knit](https://knit.work/knit/) | direction, bed+needle, carrier | `knit("+","f10","3")` | Knit a stitch, on **bed** at **needle**, in **direction**, using **carrier**
+[tuck](https://knit.work/tuck/) | direction, bed+needle, carrier| `tuck("+","f10","3")` | Tuck a stitch, on **bed** at **needle**, in **direction**, using **carrier**
+[xfer](https://knit.work/transfer/) | from bed+needle, to bed+needle | `xfer("f10","b10")` | Transfer loops from **from bed** at **needle** to  **to bed** at **needle**
+[rack](https://knit.work/rack/) | rack value (Number) | `rack(1)` | Translate the back bed relative to the front bed by **rack value** needle units. (0 by default)
+[drop](https://knit.work/drop/)| bed+needle | `drop("f10")` | Drop loops from **bed+needle** (if you can't be bothered to cast off)
+[split](https://knit.work/split/)| direction, from bed+needle, to bed+needle, carrier  | `split("+", "f1", "b1", "3")` | split the loop on **from bed** at **needle** to also be at **to bed** at **needle**
 in  | `carrier` | `in("5")` | Bring in yarn carrier **carrier**
 out | `carrier` | `out("6")` | Take out yarn carrier **carrier** (not strictly necessary on kniterate and can cause issues -- only do this right at the end)
 
