@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>material programming research project</title>
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
+	<script>
+		window.goatcounter = {
+			path: function(p) { return location.host + p }
+		}
+	</script>
+	<script data-goatcounter="https://agnescam.goatcounter.com/count"
+	 async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+<div class="post-container">
+	<p>
+		/\\/o\/\\/o\/\\/o\/\\/\o\/<span class="spacer"></span><a class="header-link" href="/index.html">home</a><br>
+		//\o/\//\o/\//\o/\//\/o/\/<span class="spacer"></span><a class="header-link" href="/blog.html">blog</a><br>
+		\/\\o/\/\\o\\/\\o\\/\\/o\\<span class="spacer"></span><a class="header-link" href="/people.html">people</a><br>
+		\//o\/\//o//\//o//\//\o//\<span class="spacer"></span><a class="header-link" href="/projects.html">projects</a><br>
+	</p>
+
+	<h1>using the patchwork editor</h1>
+	<!-- <p>author: agnes cameron</p> -->
+	<div class="text-content">
+		<p>We are using a custom-made tool called the <strong><a href="https://knit.patchwork.inkandswitch.com/">Patchwork Knitout Editor</a></strong> (&lt;- click me!) to visualise the knitout code we are writing. It is based on a tool made by Gabrielle Ohlson and Jim McCann at Carnegie Mellon University, called the <a href="https://textiles-lab.github.io/knitout-live-visualizer/">knitout visualiser</a>. Patchwork has a number of quite interesting features which we won’t explore here – this file is just to get you set up.</p>
+
+<p><strong>Be cautious:</strong> Patchwork is experimental software! Sharing a link to a file gives someone full edit access to that file, so only share things with people you trust! Don’t use this software to store personal details like passwords, bank accounts or any sensitive documents.</p>
+
+<p><span class="marginnote">
+    <img src="/img/patchwork-guide/initial-screen.png" alt="main" />
+    making a new account in Patchwork
+</span></p>
+
+<h2 id="1-making-an-account">1. Making an Account</h2>
+
+<p>When you open Patchwork for the first time, you should see a screen that looks like this: some example files in a sidebar, and a little icon in the bottom left corner that looks like a person, indicated here with a red arrow. You don’t need to make an account to use Patchwork, but it’s helpful for saving and keeping track of your files.</p>
+
+<p>Clicking the figure will take you to a login interface – type the username you want, then save the ‘account token’ somewhere safe on your computer when prompted to. This token means that you will still be able to access your files even if you’re on another computer, or on a different browser.</p>
+
+<h2 id="2-navigating-the-interface">2. Navigating the Interface</h2>
+
+<p>To open up the KnitoutJS Editor, try clicking on the file named ‘knitoutjs example’ in the examples folder in the sidebar. This will open up an interface with 3 panes. If it’s your first time opening this, there might also be two sidebars open, showing the files on one side and comments on another. If you want to close these, you can click the ‘sidebar’ icons in the top left and right corners of the interface.</p>
+
+<figure>
+    <div class="subfig">
+        <img src="/img/patchwork-guide/initial-open.png" />
+        <span class="mainnote">knitout editor with sidebars open</span>
+    </div>
+    <div class="subfig">
+        <img src="/img/patchwork-guide/initial-closed.png" />
+        <span class="mainnote">knitout editor with sidebars closed</span>
+    </div>
+</figure>
+
+<p>The Kniterate editor shows the contents of two different files across three different panes. The left-most pane shows a KnitoutJS file. This is code written in the <em>Javascript</em> programming language, that uses some extra tools from a library called <em>KnitoutJS</em> to generate <em>Knitout</em>.</p>
+
+<p>Knitout is a programming language for industrial knitting machines. It is very simple, and writes instructions for the machine one line at a time. It can take many many lines of knitout to get the machine to do anything, so we often write knitoutJS instead of knitout directly.</p>
+
+<p>The second two panes are the <em>same</em> knitout file, visualised in two different ways. The middle pane shows the file as text, and the end pane shows the same file, but viewed through a visualiser that gives you a guide to how the file will be knit on the machine. In practice, the visualiser is normally more helpful, but it’s also important to be able to read the knitout for debugging.</p>
+
+<p>You can switch between the two representations at the top of each of these panes (and close the ones you’re not looking at).</p>
+
+<figure>
+    <img src="/img/patchwork-guide/text-vis-2.png" alt="main" />
+    <span class="mainnote"></span>
+</figure>
+
+<p>If you’ve closed a pane and you want to reopen it, hit the ‘+’ button: this will bring up a list of files associated with that project (by default, this will include one Knitout file ending in .k, and one Knitoutjs file ending in .js). You can drag and drop newly opened tabs to place them in different parts of the editor.</p>
+
+<figure>
+    <img src="/img/patchwork-guide/reopen-knitout.png" alt="main" />
+    <span class="mainnote"></span>
+</figure>
+
+<h2 id="3-making-and-testing-a-new-knitout-file">3. Making and Testing a New Knitout File</h2>
+
+<figure>
+    <div class="subfig">
+        <img src="/img/patchwork-guide/new-file-top.png" />
+        <span class="mainnote">creating a new file in the top-level menu</span>
+    </div>
+    <div class="subfig">
+        <img src="/img/patchwork-guide/new-file-in-folder.png" />
+        <span class="mainnote">creating a new file inside an existing folder</span>
+    </div>
+</figure>
+
+<p>You can create new files in the left hand sidebar, either by clicking the document containing the “+” symbol at the top, or by right clicking on a folder and selecting “create” from the menu. In both cases, to make a new knitting file, select “KnitoutJS Editor” from the menu.</p>
+
+<p>This will open up a file that already contains some code, which generates a square of plain jersey, knit on the front bed. You can either edit the existing file, or delete its contents and start from scratch.</p>
+
+<figure>
+    <img src="/img/patchwork-guide/new-project.png" alt="main" />
+    <span class="mainnote"></span>
+</figure>
+
+<p>By default, the interface is set to ‘autobuild’, which automatically tries to run the KnitoutJS code in the left pane and use it to generate the knitout seen on the right. This can provide some nice instant feedback, but it can also be turned off if desired as it can be distracting if you’re making a lot of changes to the file. In this instance, the knitout is generated only when the ‘build’ button is pressed.</p>
+
+<figure>
+    <img src="/img/patchwork-guide/autobuild.png" alt="main" />
+    <span class="mainnote"></span>
+</figure>
+
+<h2 id="4-solving-errors">4. Solving Errors</h2>
+
+<p>When writing code, it’s very common to encounter errors: normally, almost all of the work of programming is not in writing the code itself, but in fixing issues that are encountered as part of that process.</p>
+
+<p>In the Knitout editor, when there is a mistake in the code that prevents knitout from being generated, this will be indicated to you in a few ways. First, the knitout panes will be pink-coloured, and will show whatever the most recent valid version of the knitout code was.</p>
+
+<p>All the panes will have a small piece of text at the top that tells you which line the error is on. Like many programming errors, sometimes, the actual problem is a bit further up, but the computer only ‘realises’ the issue when it gets to a certain line.</p>
+
+<figure>
+    <img src="/img/patchwork-guide/error.png" alt="main" />
+    <span class="mainnote"></span>
+</figure>
+
+<p>In this instance, we are missing a closing bracket on the first part of our ‘if’ statement, and the line that causes us a problem is when we get to the ‘else’ line. The error message doesn’t exactly tell us this: it says <code class="language-plaintext highlighter-rouge">expected expression, got keyword 'else'</code> – essentially, the computer saw something it wasn’t expecting, because it needed to see a closing <code class="language-plaintext highlighter-rouge">}</code> before moving on. If I add this bracket back in on line 26, the code starts working again as before.</p>
+
+	</div>
+
+</div>
+
+</body>
+</html>
