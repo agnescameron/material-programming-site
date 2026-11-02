@@ -393,8 +393,8 @@ h3 > code {
 }
 
 .workshop-link {
-    width: 300px;
-    position: absolute;
+    width: 250px;
+    position: relative;
     z-index: 3;
 }
 
