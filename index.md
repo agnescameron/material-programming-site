@@ -12,5 +12,5 @@ In **Autumn 2026**, we will be developing a new research tool, **[Auttoman](/pro
 If any of the above sounds interesting to you, please <a href="mailto:a.cameron@arts.ac.uk">get in touch</a>.
 
 <div class="workshop-link">
-	<a href="projects/workshops.html"><img src="img/workshop-1/workshop-star.png" /></a>
+	<a href="/projects/workshops.html"><img src="img/workshop-1/workshop-star.png" /></a>
 </div>

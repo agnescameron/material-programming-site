@@ -402,12 +402,6 @@ h3 > code {
   rotate: -5deg;
 }
 
-
-.marginnote > code,
-.sidenote > code {
-    font-size: 1rem; 
-}
-
 pre > code {
     font-size: 1rem;
     /*width: 85%;*/

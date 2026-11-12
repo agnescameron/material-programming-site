@@ -102,3 +102,9 @@ All the panes will have a small piece of text at the top that tells you which li
 </figure>
 
 In this instance, we are missing a closing bracket on the first part of our 'if' statement, and the line that causes us a problem is when we get to the 'else' line. The error message doesn't exactly tell us this: it says `expected expression, got keyword 'else'` -- essentially, the computer saw something it wasn't expecting, because it needed to see a closing `}` before moving on. If I add this bracket back in on line 26, the code starts working again as before.
+
+## 5. Installing Lattice
+
+Lattice is an add-on package for the Patchwork Knit Editor that changes the appearence of the interface, and gives you some extra features like the 3D visualiser. You can also make calls inside the Lattice editor, which makes it a lot easier to collaborate on documents.
+
+
