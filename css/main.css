@@ -113,15 +113,6 @@ li {
 	max-width: 500px;
 }
 
-.text-content p, ul, ol {
-	font-size: 0.9em;
-	/*list-style-type: none;*/
-}
-
-.text-content ol {
-	font-size: 0.9em;
-}
-
 
 ul {
 	margin-left: 0px !important;
